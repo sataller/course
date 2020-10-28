@@ -1,0 +1,18 @@
+.App {
+    min-height: 100vh;
+
+}
+
+.night {
+    /*background-color: #000000;*/
+    background: url("./assets/nightMode.jpg");
+    color: white;
+}
+
+.day {
+    color: black;
+    background-image: url("./assets/day.jpg");
+
+}
+
+

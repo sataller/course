@@ -1,0 +1,16 @@
+.buttons {
+    display: flex;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.button {
+    margin: 10px;
+}
+
+.signButtons {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 10px;
+}

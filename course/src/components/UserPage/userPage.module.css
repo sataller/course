@@ -1,0 +1,24 @@
+.content {
+    display: flex;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.button {
+    margin: 10px;
+    min-width: 80px;
+}
+
+.signButtons {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.toolButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+}
