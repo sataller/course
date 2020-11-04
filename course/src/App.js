@@ -9,6 +9,8 @@ import SignInContainer from "./components/LoginPage/SignInPage/SignInContainer";
 import SignUpContainer from "./components/LoginPage/SignUpPage/SignUpContainer";
 import UserPage from "./components/UserPage/UserPage";
 import AdminPageContainer from "./components/AdminPage/AdminPageContainer";
+import TagField from "./components/Tags/Tags";
+import ItemInfo from "./components/MainPage/HistoryItems/ItemInfo/ItemInfo";
 
 function App() {
 
@@ -21,10 +23,11 @@ function App() {
                 <Route exact path="/" render={() => <Redirect to={"/main"}/>}/>
                 <Route path="/main" render={() => <MainPage/>}/>
                 <Route path="/admin" render={() => <AdminPageContainer/>}/>
-                <Route path="/profile/:userId?" render={() => <UserPage/>}/>
+                <Route path="/profile/1" render={() => <UserPage/>}/>
+                <Route path="/history/1" render={() => <ItemInfo/>}/>
                 <Route path="/auth/login" render={() => <SignInContainer/>}/>
                 <Route path="/auth/register" render={() => <SignUpContainer/>}/>
-                <Route path="*" render={()=><div> 404 NOT FOUND</div>}/>
+                <Route path="*" render={() => <div> 404 NOT FOUND</div>}/>
             </Switch>
         </div>
     );

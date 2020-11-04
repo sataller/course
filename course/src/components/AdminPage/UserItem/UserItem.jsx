@@ -9,14 +9,11 @@ const UserItem = (props) => {
     return (
         <tr>
             <td>
-                {props.selectedOll?
+                {props.selectedOll ?
                     <input type={"checkbox"} checked onChange={updateCheckbox} aria-label="option 1"/> :
                     <input type={"checkbox"} onChange={updateCheckbox} aria-label="option 1"/>
                 }
-
             </td>
-
-
             < td> {props.id}</td>
             <td>{props.name}</td>
             <th>{props.email}</th>

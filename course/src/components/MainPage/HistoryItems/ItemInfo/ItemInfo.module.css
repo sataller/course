@@ -1,0 +1,23 @@
+.content {
+    display: grid;
+    color: orange;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns:  1fr;
+    grid-template-areas: "nav" "item" "chapter" "coment";
+}
+
+.nav {
+    grid-area: nav;
+}
+
+.item {
+    grid-area: item;
+}
+
+.chapter {
+    grid-area: chapter;
+}
+
+.coment {
+    grid-area: coment;
+}

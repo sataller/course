@@ -3,7 +3,8 @@ import {Button} from "react-bootstrap"
 import styles from "./Navbar.module.css"
 import SearchBlock from "./NavComponents/SearchBlock";
 import MenuButton from "./NavComponents/MenuButton";
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import Tags from "../Tags/Tags";
 
 const NavBar = (props) => {
 
@@ -40,6 +41,7 @@ const NavBar = (props) => {
 
     return (
         <div className={styles.content}>
+            <Tags/>
             <SearchBlock/>
             <div className={styles.toolButtons}>
                 {isAuth ? signOutElement : login}

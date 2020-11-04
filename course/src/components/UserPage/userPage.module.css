@@ -1,24 +1,27 @@
 .content {
-    display: flex;
+    display:grid;
+    grid-template-rows: 3fr 3fr 8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "nav"
+                         "info"
+                         "items";
+}
+.nav {
     padding: 10px;
     margin-left: 10px;
+    float: right;
+    grid-area: nav;
 }
 
-.button {
-    margin: 10px;
-    min-width: 80px;
+.items {
+    grid-area: items;
 }
 
-.signButtons {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-}
-
-.toolButtons {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-
+.userInfo {
+    border-radius: 10px;
+    background-color: rgba(169, 169, 169, 0.4);
+    color: orange;
+    padding: 20px;
+    margin-bottom: 10px;
+    grid-area: info;
 }

@@ -12,6 +12,7 @@ const HistoryItems = (props) => {
             description: " Склоны пепельных гор, шум из орочьих нор опустелый простор это мрачный Мордор.",
             genre: "фэнтези",
             tags: ["фэнтези", "фэндом"],
+            lick:3,
         },
         {
             userId: 2,
@@ -20,13 +21,14 @@ const HistoryItems = (props) => {
             description: " Склоны пепельных гор, шум из орочьих нор опустелый простор это мрачный Мордор.",
             genre: "фэнтези",
             tags: ["фэнтези", "фэндом"],
+            lick:2,
         }
 
     ];
 
     const items = item.map( i => <Item userId={i.userId} key={i.userId} userName={i.userName}
                                        title={i.title} description={i.description}
-                                       genre={i.genre} tags={i.tags} />)
+                                       genre={i.genre} tags={i.tags} lick={i.lick} />)
 
     return (
         <div className={styles.content}>

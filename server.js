@@ -1,16 +1,14 @@
-const express = require("express");
+const port = process.env.PORT || 5000;
+const app = require("./app");
 const path = require("path");
-const mysql = require("mysql");
 
-const app = express();
-app.use(express.json());
+// pass: Lxr7FS4Nc7t0cKCc
 
 
 // app.use(express.static(path.join(__dirname, 'web-client/build')));
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname + 'web-client/build', 'index.html'));
 // });
-const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server is running on ${port}`)
 })

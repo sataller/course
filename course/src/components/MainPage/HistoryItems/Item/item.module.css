@@ -11,10 +11,23 @@
     padding: 10px;
 }
 
-.author a{
-    color: grey;
+a{
+    color: #999999;
     text-decoration: none;
 }
+a:hover{
+    color: #999999;
+    /*text-decoration: none;*/
+}
+
+.lick{
+    cursor: pointer;
+}
+
+.editButton{
+    float:right;
+}
+
 .info{
 
 }
