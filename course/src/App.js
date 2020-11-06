@@ -23,7 +23,7 @@ function App() {
                 <Route exact path="/" render={() => <Redirect to={"/main"}/>}/>
                 <Route path="/main" render={() => <MainPage/>}/>
                 <Route path="/admin" render={() => <AdminPageContainer/>}/>
-                <Route path="/profile/1" render={() => <UserPage/>}/>
+                <Route path="/profile/:userId?" render={() => <UserPage/>}/>
                 <Route path="/history/1" render={() => <ItemInfo/>}/>
                 <Route path="/auth/login" render={() => <SignInContainer/>}/>
                 <Route path="/auth/register" render={() => <SignUpContainer/>}/>
