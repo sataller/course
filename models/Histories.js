@@ -204,11 +204,11 @@ const storiesSchema = new Schema({
             {
                 body: {
                     type: String,
-                    default: "Tap to write history",
+                    required:true,
                 },
                 title: {
                     type: String,
-                    default: "Tap to create title",
+                    required:true,
                 },
                 imageSrc: {
                     type: String,

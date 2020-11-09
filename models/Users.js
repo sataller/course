@@ -33,6 +33,10 @@ const usersSchema = new Schema([
             type: String,
             default:"day",
         },
+        confirm: {
+            type: Boolean,
+            default: false,
+        },
     }
 ]);
 

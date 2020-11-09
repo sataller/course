@@ -1,6 +1,7 @@
 // const User = require('../models/Users');
-const History = require('../models/Historys');
+const History = require('../models/Histories');
 const errorHandler = require('../utils/errorHandler');
+const updatObj = require('../utils/objectHelpers');
 
 module.exports.getHistories = async function (req, res) {
     try {
@@ -13,15 +14,21 @@ module.exports.getHistories = async function (req, res) {
     }
 };
 
+module.exports.getHistory = async function (req, res) {
+    try {
+        const history = await History.findById(req.params.historyId)
+        res.status(200).json({history, resultCode: 0})
+    } catch (e) {
+        errorHandler(res, e);
+    }
+};
+
 module.exports.create = async function (req, res) {
     try {
         const history = await new History({
-            description: req.body.description,
-            title: req.body.title,
-            like: req.body.like,
-            rating: req.body.rating,
+            description: req.body.description ? req.body.description : "here will be a description",
+            title: req.body.title ? req.body.title : "here will be the title",
             author: req.user,
-            chapter: req.body.chapter,
         }).save();
         res.status(201).json({history, resultCode: 0})
     } catch (e) {
@@ -30,18 +37,25 @@ module.exports.create = async function (req, res) {
 };
 
 module.exports.update = async function (req, res) {
+    const history = await History.findById(req.params.historyId);
     const update = {
-        description: req.body.description,
-        title: req.body.title,
-        like: req.body.like,
-        rating: req.body.rating,
-        tags: req.body.tags,
+        description: req.body.description ? req.body.description : history.description,
+        title: req.body.title ? req.body.title : history.title,
+        like: updatObj.updateLike(req.user, history.like.likeNumber,
+            history.like.likedUsers, req.body.like),
+        rating: updatObj.updateRate(req.user, history.rating.ratingNumber,
+            history.rating.ratingAddUsers, req.body.rating),
+        tags: req.body.tags ? req.body.tags : history.tags,
+        updateDate: Date.now,
     };
     try {
-        const history = await History.findeOneAndUpdate(
+        const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},
             {$set: update},
-            {new: true}
+            {
+                new: true,
+                useFindAndModify: false
+            }
         );
         res.status(200).json({history, resultCode: 0});
     } catch (e) {
@@ -52,17 +66,24 @@ module.exports.update = async function (req, res) {
 module.exports.updateChapter = async function (req, res) {
     const history = await History.findById(req.params.historyId);
     const update = {
-        body: req.body.body ? req.body.body : "",
-        title: req.body.title ? req.body.title : "",
-        imageSrc: req.file ? req.file.path : "",
+        description: history.description,
+        title: history.title,
+        like: history.like,
+        rating: history.rating,
+        tags: history.tags,
+        updateDate: Date.now,
+        chapters: updatObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
     };
     try {
-        const chapter = await history.chapters.findeOneAndUpdate(
+        const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},
             {$set: update},
-            {new: true}
+            {
+                new: true,
+                useFindAndModify: false
+            }
         );
-        res.status(200).json({chapter, resultCode: 0});
+        res.status(200).json({history, resultCode: 0});
     } catch (e) {
         errorHandler(res, e);
     }
@@ -70,20 +91,43 @@ module.exports.updateChapter = async function (req, res) {
 
 module.exports.createChapter = async function (req, res) {
     const history = await History.findById(req.params.historyId);
-    const update = {
-        chapter: [...history.chapter,
-            {
-                body: req.body.body ? req.body.body : "",
-                title: req.body.title ? req.body.title : "",
-                imageSrc: req.file ? req.file.path : "",
-            }
-        ]
-    };
+    let update;
+    let updateI = (i) => {
+        if (i) {
+            return i
+        }
+    }
+    if (history.chapter) {
+        update = {
+            updateDate: Date.now,
+            chapters: [...history.chapter,
+                {
+                    body: updateI(req.body.body),
+                    title: updateI(req.body.title),
+                    imageSrc: "",
+                }
+            ]
+        };
+    } else {
+        update = {
+            updateDate: Date.now,
+            chapters: [
+                {
+                    body: updateI(req.body.body),
+                    title: updateI(req.body.title),
+                    imageSrc: "",
+                }
+            ]
+        };
+    }
     try {
-        const history = await History.findeOneAndUpdate(
+        const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},
             {$set: update},
-            {new: true}
+            {
+                new: true,
+                useFindAndModify: false
+            }
         );
         res.status(201).json(history);
     } catch (e) {
@@ -93,19 +137,34 @@ module.exports.createChapter = async function (req, res) {
 
 module.exports.createComment = async function (req, res) {
     const history = await History.findById(req.params.historyId);
-    const update = {
-        comments: [...history.comments,
-            {
+    let update;
+    if (history.comments) {
+        update = {
+            updateDate: Date.now,
+            comments: [...history.comments,
+                {
+                    body: req.body.body,
+                    user: req.body.user,
+                }
+            ]
+        }
+    } else {
+        update = {
+            updateDate: Date.now,
+            comments: [{
                 body: req.body.body,
                 user: req.body.user,
-            }
-        ]
-    };
+            }]
+        }
+    }
     try {
-        const history = await History.findeOneAndUpdate(
+        const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},
             {$set: update},
-            {new: true}
+            {
+                new: true,
+                useFindAndModify: false
+            }
         );
         res.status(200).json({history, resultCode: 0});
     } catch (e) {

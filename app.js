@@ -16,7 +16,7 @@ mongoose.connect(keys.mongoURI,
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-// app.use('https://yadi.sk/d/XeXDyDYfcQ23cA?w=1',express.static('uploads'))
+app.use('https://yadi.sk/d/XeXDyDYfcQ23cA?w=1',express.static('uploads'))
 app.use(express.json());
 
 app.use('/auth', authRotes);

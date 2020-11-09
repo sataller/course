@@ -3,7 +3,8 @@ const moment = require('moment');
 
 const storage = multer.diskStorage({
     destination(rec, file, cb) {
-        cb(null, 'https://yadi.sk/d/XeXDyDYfcQ23cA?w=1')
+        cb(null, '/s/coursProject/course/src/assets')
+    //        https://yadi.sk/d/XeXDyDYfcQ23cA?w=1'
     },
     filename(rec, file, cb) {
         const date = moment().format('DDMMYYYY-HHmmss_SSS');
