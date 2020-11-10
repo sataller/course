@@ -7,28 +7,31 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.login = async function (req, res) {
     const condidate = await User.findOne({email: req.body.email});
-    if (condidate.confirm === true) {
-        const passwordResult = bcrypt.compareSync(req.body.password, condidate.password);
-        if (passwordResult) {
-            const token = jwt.sign({
-                name: condidate.name,
-                role: condidate.role,
-                them: condidate.them,
-                userId: condidate._id
-            }, keys.jwt, {expiresIn: 60 * 60});
-            res.status(200).json({
-                token: `Bearer ${token}`,
-                resultCode: 0,
-            });
-        } else if (condidate.confirm === false) {
+    console.log(condidate.confirm);
+    if (condidate) {
+        if (condidate.confirm) {
+            const passwordResult = bcrypt.compareSync(req.body.password, condidate.password);
+            if (passwordResult) {
+                const token = jwt.sign({
+                    name: condidate.name,
+                    role: condidate.role,
+                    them: condidate.them,
+                    userId: condidate._id
+                }, keys.jwt, {expiresIn: 60 * 60});
+                res.status(200).json({
+                    token: `Bearer ${token}`,
+                    resultCode: 0,
+                });
+            } else {
+                res.status(401).json({
+                    message: "Email or password incorrect",
+                    resultCode: 1,
+                });
+            }
+        } else {
             res.status(401).json({
                 confirm: false,
                 message: "You need to confirm your email address",
-                resultCode: 1,
-            });
-        } else {
-            res.status(401).json({
-                message: "Email or password incorrect",
                 resultCode: 1,
             });
         }
@@ -53,7 +56,7 @@ module.exports.register = async function (req, res) {
             password: bcrypt.hashSync(password, salt),
         });
         const mailOptions = {
-            to:req.body.email,
+            to: req.body.email,
             subject: 'You have successfully registered on the site',
             html: `
     <h2>You have successfully registered on the site</h2>

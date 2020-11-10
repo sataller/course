@@ -4,10 +4,12 @@ module.exports.updateLike = (userId, likeNumber, likedUsers, like) => {
         if (user === -1) {
             likeNumber = ++likeNumber;
             likedUsers = [...likedUsers, userId];
+        } else if (likedUsers.length === 1) {
+            likeNumber = --likeNumber;
+            likedUsers = [];
         } else {
             likeNumber = --likeNumber;
-
-            likedUsers = likedUsers.splice(user - 1, 1);
+            likedUsers = likedUsers.splice(user, 1);
         }
         return ({
                 likeNumber,
@@ -26,11 +28,12 @@ module.exports.updateRate = (userId, ratingNumber, ratingAddUsers, newRate) => {
     if (newRate) {
         let user = {user: userId, rating: newRate};
         let userIndex = ratingAddUsers.map(i => i.user).indexOf(userId._id);
+        console.log(userIndex);
         if (userIndex === -1) {
             ratingAddUsers = [...ratingAddUsers, user];
+            ratingAddUsers[userIndex].rating = newRate;
         } else {
-            ratingAddUsers = ratingAddUsers.splice(userIndex - 1, 1);
-            ratingAddUsers = [...ratingAddUsers, user];
+            ratingAddUsers[userIndex].rating = newRate;
         }
         ratingNumber = ratingAddUsers.reduce((sum, item) => sum + item.rating, 0) / ratingAddUsers.length;
         return ({
@@ -52,7 +55,7 @@ module.exports.updateChapter = (chapterId, chapters, body, file) => {
         return i ? i : j
     }
     const update = {
-        _id:chapters[chapterIndex]._id,
+        _id: chapters[chapterIndex]._id,
         imageSrc: updateI(file.path, chapters[chapterIndex].imageSrc),
         body: updateI(body.body, chapters[chapterIndex].body),
         title: updateI(body.title, chapters[chapterIndex].title),

@@ -6,8 +6,13 @@ const updatObj = require('../utils/objectHelpers');
 module.exports.getHistories = async function (req, res) {
     try {
         const histories = await History
-            .sort({date: -1})
-            .limit(20)
+            .find({
+                "rating.ratingNumber": {
+                    $gte: 4,
+                }
+            })
+            .sort({updateDate: -1})
+            .limit(20);
         res.status(200).json({histories, resultCode: 0})
     } catch (e) {
         errorHandler(res, e);
@@ -29,6 +34,10 @@ module.exports.create = async function (req, res) {
             description: req.body.description ? req.body.description : "here will be a description",
             title: req.body.title ? req.body.title : "here will be the title",
             author: req.user,
+            rating:{
+                user:req.user,
+                ratingNumber: 5,
+            },
         }).save();
         res.status(201).json({history, resultCode: 0})
     } catch (e) {
@@ -46,7 +55,7 @@ module.exports.update = async function (req, res) {
         rating: updatObj.updateRate(req.user, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
-        updateDate: Date.now,
+        // updateDate: Date.now,
     };
     try {
         const history = await History.findOneAndUpdate(
