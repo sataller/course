@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css"
 import SearchBlock from "./NavComponents/SearchBlock";
 import MenuButton from "./NavComponents/MenuButton";
 import {NavLink} from "react-router-dom";
-import Tags from "../Tags/Tags";
+// import Tags from "../Tags/Tags";
 
 const NavBar = (props) => {
 
@@ -37,18 +37,18 @@ const NavBar = (props) => {
                 </Button>{' '}
             </div>
         </div>
-    )
+    );
 
     return (
         <div className={styles.content}>
-            <Tags/>
+            {/*<Tags/>*/}
             <SearchBlock/>
             <div className={styles.toolButtons}>
                 {isAuth ? signOutElement : login}
             </div>
         </div>
     )
-}
+};
 
 
 export default NavBar

@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRotes = require('./routes/auth');
-const adminRotes = require('./routes/admin');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
@@ -16,7 +15,7 @@ mongoose.connect(keys.mongoURI,
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-app.use('D/s/coursProject/course/src/assets',express.static('uploads'))
+app.use('D/s/coursProject/course/src/assets', express.static('uploads'))
 app.use(express.json());
 
 app.use('/auth', authRotes);

@@ -9,7 +9,6 @@ import SignInContainer from "./components/LoginPage/SignInPage/SignInContainer";
 import SignUpContainer from "./components/LoginPage/SignUpPage/SignUpContainer";
 import UserPage from "./components/UserPage/UserPage";
 import AdminPageContainer from "./components/AdminPage/AdminPageContainer";
-import TagField from "./components/Tags/Tags";
 import ItemInfo from "./components/MainPage/HistoryItems/ItemInfo/ItemInfo";
 
 function App() {

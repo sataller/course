@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./mainPage.module.css"
-import NavBar from "../Navbar/Navbar";
 import HistoryItems from "./HistoryItems/HistoryItems";
+import NavBar from "../Navbar/Navbar";
 
 const MainPage = (props) => {
     return (

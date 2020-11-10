@@ -1,9 +1,7 @@
 import React from "react";
-import {Form} from "react-bootstrap";
 
 const UserItem = (props) => {
     const updateCheckbox = (e) => {
-        // props.setSelect(props.id, e.target.checked)
         console.log(e.target.checked)
     }
     return (
