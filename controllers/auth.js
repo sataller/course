@@ -10,21 +10,35 @@ module.exports.login = async function (req, res) {
     console.log(condidate.confirm);
     if (condidate) {
         if (condidate.confirm) {
-            const passwordResult = bcrypt.compareSync(req.body.password, condidate.password);
-            if (passwordResult) {
-                const token = jwt.sign({
-                    name: condidate.name,
-                    role: condidate.role,
-                    them: condidate.them,
-                    userId: condidate._id
-                }, keys.jwt, {expiresIn: 60 * 60});
-                res.status(200).json({
-                    token: `Bearer ${token}`,
-                    resultCode: 0,
-                });
+            if (condidate.status) {
+                const passwordResult = bcrypt.compareSync(req.body.password, condidate.password);
+                if (passwordResult) {
+                    const token = jwt.sign({
+                        name: condidate.name,
+                        role: condidate.role,
+                        them: condidate.them,
+                        userId: condidate._id
+                    }, keys.jwt, {expiresIn: 60 * 60});
+                    res.status(200).json({
+                        token: `Bearer ${token}`,
+                        user: {
+                            id: condidate._id,
+                            name: condidate.name,
+                            role: condidate.role,
+                            status: condidate.status,
+                            them: condidate.them,
+                        },
+                        resultCode: 0,
+                    });
+                } else {
+                    res.status(401).json({
+                        message: "Email or password incorrect",
+                        resultCode: 1,
+                    });
+                }
             } else {
                 res.status(401).json({
-                    message: "Email or password incorrect",
+                    message: "User are blocked by admin",
                     resultCode: 1,
                 });
             }
@@ -72,7 +86,6 @@ module.exports.register = async function (req, res) {
             await user.save();
             mailer.mailer(mailOptions);
             res.status(201).json({
-                user,
                 message: "You need to confirm your email address. Check your email. ",
                 resultCode: 0
             })
@@ -99,7 +112,10 @@ module.exports.confirm = async function (req, res) {
                 useFindAndModify: false
             }
         );
-        res.status(201).json({user, resultCode: 0});
+        res.status(201).json({
+            message: "Now you need to login",
+            resultCode: 0
+        });
     } catch (e) {
         errorHandler(res, e);
     }

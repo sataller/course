@@ -4,7 +4,18 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.getByUserId = async function (req, res) {
     try {
         const user = await User.findById(req.params.userId);
-        res.status(200).json({user, resultCode: 0});
+        res.status(200).json({
+            user: {
+                name: user.name,
+                status: user.status,
+                email: user.email,
+                role: user.role,
+                them: user.them,
+                confirm: user.confirm,
+                registerDate: user.registerDate,
+            },
+            resultCode: 0
+        });
     } catch (e) {
         errorHandler(res, e);
     }
@@ -20,13 +31,33 @@ module.exports.getUsers = async function (req, res) {
 };
 
 module.exports.update = async function (req, res) {
+    const user = await User.findById(req.params.userId);
+    const update = {
+        name: req.body.name ? req.body.name : user.name,
+        status: req.body.status ? req.body.status : user.status,
+        email: req.body.email ? req.body.email : user.email,
+        password: req.body.password ? req.body.password : user.password,
+        role: req.body.role ? req.body.role : user.role,
+        them: req.body.them ? req.body.them : user.them,
+        confirm: user.confirm,
+    };
     try {
         const user = await User.findOneAndUpdate(
             {_id: req.params.userId},
-            {$set: req.body},
+            {$set: update},
             {new: true}
         );
-        res.status(200).json({user, resultCode: 0});
+        res.status(200).json({
+            user: {
+                name: user.name,
+                status: user.status,
+                email: user.email,
+                role: user.role,
+                them: user.them,
+                confirm: user.confirm,
+                registerDate: user.registerDate,
+            }, resultCode: 0
+        });
     } catch (e) {
         errorHandler(res, e);
     }

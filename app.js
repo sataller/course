@@ -16,11 +16,10 @@ mongoose.connect(keys.mongoURI,
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-app.use('https://yadi.sk/d/XeXDyDYfcQ23cA?w=1',express.static('uploads'))
+app.use('D/s/coursProject/course/src/assets',express.static('uploads'))
 app.use(express.json());
 
 app.use('/auth', authRotes);
-app.use('/admin', adminRotes);
 app.use('/history', historyRotes);
 app.use('/users', userRotes);
 
