@@ -56,7 +56,7 @@ module.exports.updateChapter = (chapterId, chapters, body, file) => {
     }
     const update = {
         _id: chapters[chapterIndex]._id,
-        imageSrc: updateI(file.path, chapters[chapterIndex].imageSrc),
+        imageSrc: file ? file.location : chapters[chapterIndex].imageSrc,
         body: updateI(body.body, chapters[chapterIndex].body),
         title: updateI(body.title, chapters[chapterIndex].title),
     };

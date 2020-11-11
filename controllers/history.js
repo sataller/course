@@ -34,8 +34,8 @@ module.exports.create = async function (req, res) {
             description: req.body.description ? req.body.description : "here will be a description",
             title: req.body.title ? req.body.title : "here will be the title",
             author: req.user,
-            rating:{
-                user:req.user,
+            rating: {
+                user: req.user,
                 ratingNumber: 5,
             },
         }).save();
@@ -55,7 +55,7 @@ module.exports.update = async function (req, res) {
         rating: updatObj.updateRate(req.user, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
-        // updateDate: Date.now,
+        // updateDate: new Date.now,
     };
     try {
         const history = await History.findOneAndUpdate(
@@ -80,9 +80,9 @@ module.exports.updateChapter = async function (req, res) {
         like: history.like,
         rating: history.rating,
         tags: history.tags,
-        updateDate: Date.now,
         chapters: updatObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
     };
+    // console.log(req.file)
     try {
         const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},
