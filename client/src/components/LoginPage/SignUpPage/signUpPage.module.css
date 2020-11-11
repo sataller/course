@@ -23,3 +23,21 @@
     justify-content: center;
     margin-top: 20px;
 }
+
+.completedPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.completedPage h5{
+    text-align: center;
+}
+
+.link{
+    margin-left: 10px;
+}

@@ -107,22 +107,22 @@ export const signUp = (userData) => (dispatch) => {
     })
 }
 
-export const signIn = (userData) => (dispatch) => {
-    fetch('/auth', {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-            "Content-type": "application/json"
-        }
-    })
-        .then(response => response.json()).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setAuthUser(data.authId, userData.email, userData.name, true))
-        } else {
-            alert(data.message);
-        }
-    })
-}
+// export const signIn = (userData) => (dispatch) => {
+//     fetch('/auth', {
+//         method: 'POST',
+//         body: JSON.stringify(userData),
+//         headers: {
+//             "Content-type": "application/json"
+//         }
+//     })
+//         .then(response => response.json()).then(data => {
+//         if (data.resultCode === 0) {
+//             dispatch(setAuthUser(data.authId, userData.email, userData.name, true))
+//         } else {
+//             alert(data.message);
+//         }
+//     })
+// }
 
 export const signOut = () => (dispatch) => {
     fetch('/logout').then(response => response.json()).then(data => {

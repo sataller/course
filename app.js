@@ -15,8 +15,8 @@ mongoose.connect(keys.mongoURI,
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-// app.use('D/s/coursProject/course/src/assets', express.static('uploads'));
-app.use('https://s3.console.aws.amazon.com/s3/buckets/courseprojectbucket?region=eu-central-1&tab=objects', express.static('uploads'));
+app.use('https://s3.console.aws.amazon.com/s3/buckets/courseprojectbucket?region=eu-central-1&tab=objects',
+    express.static('uploads'));
 app.use(express.json());
 
 app.use('/auth', authRotes);

@@ -78,6 +78,7 @@ module.exports.register = async function (req, res) {
      <a href="http://127.0.0.1:5000/auth/confirm/${user._id}">
      here
       </a>
+      and login
       </span>
     <p>You don't need to respond to this email</p>
     `
@@ -85,10 +86,7 @@ module.exports.register = async function (req, res) {
         try {
             await user.save();
             mailer.mailer(mailOptions);
-            res.status(201).json({
-                message: "You need to confirm your email address. Check your email. ",
-                resultCode: 0
-            })
+            res.redirect("http://localhost:3000/auth/complete")
         } catch (e) {
             errorHandler(res, e);
         }
@@ -112,10 +110,7 @@ module.exports.confirm = async function (req, res) {
                 useFindAndModify: false
             }
         );
-        res.status(201).json({
-            message: "Now you need to login",
-            resultCode: 0
-        });
+        res.redirect("http://localhost:3000/auth/confirmed");
     } catch (e) {
         errorHandler(res, e);
     }

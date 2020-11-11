@@ -7,9 +7,11 @@ import {Provider} from "react-redux";
 import store from "./redux/ReduxStore";
 import SignInContainer from "./components/LoginPage/SignInPage/SignInContainer";
 import SignUpContainer from "./components/LoginPage/SignUpPage/SignUpContainer";
-import UserPage from "./components/UserPage/UserPage";
 import AdminPageContainer from "./components/AdminPage/AdminPageContainer";
 import ItemInfo from "./components/MainPage/HistoryItems/ItemInfo/ItemInfo";
+import UserPageContainer from "./components/UserPage/UserPageContainer";
+import RegisterCompletedPage from "./components/LoginPage/SignUpPage/RegisterCompletedPage";
+import RegisterConfirmedPage from "./components/LoginPage/SignUpPage/RegisterConfirmedPage";
 
 function App() {
 
@@ -22,10 +24,12 @@ function App() {
                 <Route exact path="/" render={() => <Redirect to={"/main"}/>}/>
                 <Route path="/main" render={() => <MainPage/>}/>
                 <Route path="/admin" render={() => <AdminPageContainer/>}/>
-                <Route path="/profile/:userId?" render={() => <UserPage/>}/>
+                <Route path="/profile/:userId?" render={() => <UserPageContainer/>}/>
                 <Route path="/history/1" render={() => <ItemInfo/>}/>
                 <Route path="/auth/login" render={() => <SignInContainer/>}/>
                 <Route path="/auth/register" render={() => <SignUpContainer/>}/>
+                <Route path="/auth/complete" render={() => <RegisterCompletedPage/>}/>
+                <Route path="/auth/confirmed" render={() => <RegisterConfirmedPage/>}/>
                 <Route path="*" render={() => <div> 404 NOT FOUND</div>}/>
             </Switch>
         </div>

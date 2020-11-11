@@ -4,11 +4,14 @@ import UserPage from "./UserPage";
 import {connect} from "react-redux";
 import withAuthRedirect from "../HOC/withAuthRedirect";
 import ToolBarContainer from "../ToolBar/ToolBarContainer";
-import {deleteUser, selectOll, setSelect, setUsers} from "../../redux/adminReducer";
 
 class AdminPageContainer extends React.Component {
     render() {
-
+        if (this.props.authUser.role !== "admin"){
+            return (
+                <></>
+            )
+        }
         return (
             <div className={styles.table}>
                 <ToolBarContainer/>
@@ -20,16 +23,14 @@ class AdminPageContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     users: state.adminPage.users,
-    isAuth: state.adminPage.isAuth,
+    isAuth: state.usersPage.isAuth,
+    authUser: state.usersPage.authUser,
     selectedOll: state.adminPage.selectedOll,
-})
+});
 
-// let AuthRedirectComponent = withAuthRedirect(AdminPageContainer)
+let AuthRedirectComponent = withAuthRedirect(AdminPageContainer);
 
 export default connect(mapStateToProps, {
-    setUsers,
-    selectOll,
-    deleteUser,
-    setSelect,
-})(AdminPageContainer)
-// })(AuthRedirectComponent)
+
+// })(AdminPageContainer)
+})(AuthRedirectComponent);

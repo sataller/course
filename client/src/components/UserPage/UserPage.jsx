@@ -1,8 +1,8 @@
 import React from "react"
 import styles from "./userPage.module.css"
-import NavBar from "../Navbar/Navbar";
 import Item from "../MainPage/HistoryItems/Item/Item";
 import {NavLink} from "react-router-dom";
+import NavBarContainer from "../Navbar/NavbarContainet";
 
 const UserPage = (props) => {
 
@@ -38,7 +38,7 @@ const UserPage = (props) => {
     return (
         <div className={styles.content}>
             <div className={styles.nav}>
-                <NavBar/>
+                <NavBarContainer/>
             </div>
             <div className={styles.userInfo}>
                 <div className={styles.author}>

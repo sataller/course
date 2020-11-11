@@ -4,10 +4,7 @@ import React from "react";
 
 const MenuButton = (props) => {
     let nightMode = false;
-    const signOut = () => {
-        alert("sign Out");
-        // props.signOut(false);
-    }
+
     const changeThem = () => {
         nightMode = !nightMode;
         alert(nightMode);
@@ -22,7 +19,7 @@ const MenuButton = (props) => {
                 {nightMode ? <Dropdown.Item onClick={changeThem}>Chang them</Dropdown.Item> :
                     <Dropdown.Item onClick={changeThem}>Chang them</Dropdown.Item>}
                 <Dropdown.Divider/>
-                <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
+                <Dropdown.Item onClick={props.signOut}>Sign Out</Dropdown.Item>
             </DropdownButton>
         </div>
     )

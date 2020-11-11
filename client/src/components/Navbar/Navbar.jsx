@@ -10,27 +10,25 @@ const NavBar = (props) => {
 
     const isAuth = true;
     const signOut = () => {
-        alert("click!");
-    }
+        alert("click")
+    };
 
     const signOutElement = (
         <div>
-            <MenuButton/>
+            <MenuButton signOut={signOut}/>
         </div>
     );
     const login = (
         <div className={styles.login}>
             <div>
-                <Button className={styles.button} variant="secondary"
-                        onClick={signOut}>
+                <Button className={styles.button} variant="secondary">
                     <NavLink to={"/auth/register"}>
                         Sign Up
                     </NavLink>
                 </Button>{' '}
             </div>
             <div>
-                <Button className={styles.button} variant="secondary"
-                        onClick={signOut}>
+                <Button className={styles.button} variant="secondary">
                     <NavLink to={"/auth/login"}>
                         Sign In
                     </NavLink>
@@ -44,7 +42,7 @@ const NavBar = (props) => {
             {/*<Tags/>*/}
             <SearchBlock/>
             <div className={styles.toolButtons}>
-                {isAuth ? signOutElement : login}
+                {props.isAuth ? signOutElement : login}
             </div>
         </div>
     )

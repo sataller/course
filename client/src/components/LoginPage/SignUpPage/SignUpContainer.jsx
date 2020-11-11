@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import SignUp from "./SignUp";
 import {Redirect} from "react-router-dom";
+import {signUp} from "../../../redux/usersReducer";
 
 class SignUpContainer extends React.Component {
     render() {
@@ -10,12 +11,14 @@ class SignUpContainer extends React.Component {
         }
         return (
             <div>
-                <SignUp setUsers={this.props.setUsers} signUp={this.props.signUp} setAuth={this.props.setAuth}/>
+                <SignUp  message={this.props.message} signUp={this.props.signUp}/>
             </div>
         )
     }
 }
 
-let mapStateToProps = (state) => ({})
+let mapStateToProps = (state) => ({
+    message: state.usersPage.message,
+});
 
-export default connect(mapStateToProps, {})(SignUpContainer)
+export default connect(mapStateToProps, {signUp})(SignUpContainer)
