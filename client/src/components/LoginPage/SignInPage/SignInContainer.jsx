@@ -2,7 +2,7 @@ import React from "react";
 import SignIn from "./SignIn";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {signIn} from "../../../redux/usersReducer";
+import {signIn} from "../../../redux/authReducer";
 
 class SignInContainer extends React.Component {
 
@@ -19,9 +19,9 @@ class SignInContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.usersPage.isAuth,
-    authUser: state.usersPage.authUser,
-    users: state.usersPage.users,
+    isAuth: state.authPage.isAuth,
+    authUser: state.authPage.authUser,
+    users: state.authPage.users,
 })
 
 export default connect(mapStateToProps, {signIn})(SignInContainer)

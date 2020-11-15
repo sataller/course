@@ -11,10 +11,6 @@ const SignIn = (props) => {
         props.signIn(value.email, value.password);
     };
 
-    const setAuth = () => {
-        props.setAuth()
-    }
-
     return (
         <div className={styles.wrapper}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
@@ -33,7 +29,7 @@ const SignIn = (props) => {
             </form>
         </div>
     )
-}
+};
 
 
 export default SignIn

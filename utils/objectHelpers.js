@@ -1,5 +1,5 @@
 module.exports.updateLike = (userId, likeNumber, likedUsers, like) => {
-    if (like == true) {
+    if (like === true) {
         let user = likedUsers.indexOf(userId._id);
         if (user === -1) {
             likeNumber = ++likeNumber;
@@ -62,4 +62,11 @@ module.exports.updateChapter = (chapterId, chapters, body, file) => {
     };
     chapters[chapterIndex] = update;
     return chapters
+};
+module.exports.updateUserStatus = (prevUserStatus, newUserStatus) => {
+    let newStatus = prevUserStatus;
+   if (newUserStatus === true || newUserStatus === false ){
+       newStatus = newUserStatus;
+   }
+    return newStatus
 };

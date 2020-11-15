@@ -2,26 +2,35 @@ import React from "react";
 import {Table} from "react-bootstrap";
 import styles from "./userPage.module.css"
 import UserItem from "./UserItem/UserItem";
+import {Redirect} from "react-router-dom";
 
 const UserPage = (props) => {
 
-    const usersElement = props.users.map(i => <UserItem id={i.userId} email={i.email}
-                                                        name={i.userName} registerDate={i.registerDate}
-                                                        lastLoginDate={i.lastLoginDate} status={i.status}
+    if (localStorage.getItem('Authorization') === null) {
+        return <Redirect to="auth/login"/>
+    } else if (!props.authUser) {
+    } else if (props.authUser.role !== "admin") {
+        return <Redirect to="/main"/>
+    }
+    const usersElement = props.users.map(i => <UserItem id={i.id} email={i.email}
+                                                        name={i.name} registerDate={i.registerDate}
+                                                        role={i.role} status={i.status}
                                                         selected={i.selected} key={i.id}
-                                                        setSelect={props.setSelect}/>)
+                                                        updateUser={props.updateUser}
+                                                        deleteUser={props.deleteUser}
+                                                        authUser={props.authUser}
+                                                        setSelect={props.setSelect}/>);
     return (
         <div className={styles.table}>
             <Table striped bordered hover variant="dark">
                 <thead>
                 <tr>
-                    <th>Chose</th>
-                    <th>id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Register date</th>
-                    <th>Last Login</th>
+                    <th>Role</th>
                     <th>Status</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -1,34 +1,16 @@
 import React from "react"
 import styles from "./historyItems.module.css"
 import Item from "./Item/Item";
+import {setUserHistories} from "../../../redux/historyReducer";
 
 const HistoryItems = (props) => {
 
-    let item = [
-        {
-            userId: 1,
-            userName: "testUser1",
-            title: "Мордор",
-            description: " Склоны пепельных гор, шум из орочьих нор опустелый простор это мрачный Мордор.",
-            genre: "фэнтези",
-            tags: ["фэнтези", "фэндом"],
-            lick:3,
-        },
-        {
-            userId: 2,
-            userName: "testUser2",
-            title: "Мордор",
-            description: " Склоны пепельных гор, шум из орочьих нор опустелый простор это мрачный Мордор.",
-            genre: "фэнтези",
-            tags: ["фэнтези", "фэндом"],
-            lick:2,
-        }
-
-    ];
-
-    const items = item.map( i => <Item userId={i.userId} key={i.userId} userName={i.userName}
-                                       title={i.title} description={i.description}
-                                       genre={i.genre} tags={i.tags} lick={i.lick} />)
+    const items = props.histories.map(i => <Item id={i._id} key={i._id} name={i.name}
+                                                 title={i.title} author={i.author} description={i.description}
+                                                 rating={i.rating} tags={i.tags} like={i.like}
+                                                 setUserHistories={props.setUserHistories}
+                                                 authUser={props.authUser}
+                                                 updateHistory={props.updateHistory}/>);
 
     return (
         <div className={styles.content}>

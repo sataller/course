@@ -44,11 +44,11 @@ const storiesSchema = new Schema({
             {
                 body: {
                     type: String,
-                    required:true,
+                    required: true,
                 },
                 title: {
                     type: String,
-                    required:true,
+                    required: true,
                 },
                 imageSrc: {
                     type: String,
@@ -57,8 +57,14 @@ const storiesSchema = new Schema({
             }
         ],
         author: {
-            ref: 'users',
-            type: Schema.Types.ObjectId,
+            user: {
+                ref: 'users',
+                type: Schema.Types.ObjectId
+            },
+            userName:{
+                type: String,
+                required: true,
+            }
         },
         tags: [
             {

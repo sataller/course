@@ -6,7 +6,8 @@ const controller = require('../controllers/history');
 
 passportAuth = passport.authenticate('jwt', {"session": false});
 
-router.get('/', passportAuth, controller.getHistories);
+router.get('/', controller.getHistories);
+router.get('/:userId', controller.getUserHistories);
 router.post('/', passportAuth, controller.create);
 router.get('/:historyId', passportAuth, controller.getHistory);
 router.patch('/:historyId', passportAuth, controller.update);

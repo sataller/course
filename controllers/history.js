@@ -1,7 +1,6 @@
-// const User = require('../models/Users');
 const History = require('../models/Histories');
 const errorHandler = require('../utils/errorHandler');
-const updatObj = require('../utils/objectHelpers');
+const updateObj = require('../utils/objectHelpers');
 
 module.exports.getHistories = async function (req, res) {
     try {
@@ -19,9 +18,23 @@ module.exports.getHistories = async function (req, res) {
     }
 };
 
+module.exports.getUserHistories = async function (req, res) {
+    try {
+        const histories = await History
+            .find({
+                "author.user": {
+                    $eq: req.params.userId,
+                }
+            });
+        res.status(200).json({histories, resultCode: 0})
+    } catch (e) {
+        errorHandler(res, e);
+    }
+};
+
 module.exports.getHistory = async function (req, res) {
     try {
-        const history = await History.findById(req.params.historyId)
+        const history = await History.findById(req.params.historyId);
         res.status(200).json({history, resultCode: 0})
     } catch (e) {
         errorHandler(res, e);
@@ -33,7 +46,10 @@ module.exports.create = async function (req, res) {
         const history = await new History({
             description: req.body.description ? req.body.description : "here will be a description",
             title: req.body.title ? req.body.title : "here will be the title",
-            author: req.user,
+            author: {
+            user:req.userId,
+            userName:req.userName,
+            },
             rating: {
                 user: req.user,
                 ratingNumber: 5,
@@ -50,9 +66,9 @@ module.exports.update = async function (req, res) {
     const update = {
         description: req.body.description ? req.body.description : history.description,
         title: req.body.title ? req.body.title : history.title,
-        like: updatObj.updateLike(req.user, history.like.likeNumber,
+        like: updateObj.updateLike(req.user, history.like.likeNumber,
             history.like.likedUsers, req.body.like),
-        rating: updatObj.updateRate(req.user, history.rating.ratingNumber,
+        rating: updateObj.updateRate(req.user, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
         // updateDate: new Date.now,
@@ -80,9 +96,8 @@ module.exports.updateChapter = async function (req, res) {
         like: history.like,
         rating: history.rating,
         tags: history.tags,
-        chapters: updatObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
+        chapters: updateObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
     };
-    // console.log(req.file)
     try {
         const history = await History.findOneAndUpdate(
             {_id: req.params.historyId},

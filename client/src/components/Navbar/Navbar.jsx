@@ -8,14 +8,13 @@ import {NavLink} from "react-router-dom";
 
 const NavBar = (props) => {
 
-    const isAuth = true;
     const signOut = () => {
         alert("click")
     };
 
     const signOutElement = (
         <div>
-            <MenuButton signOut={signOut}/>
+            <MenuButton updateUser={props.updateUser} authUser={props.authUser} signOut={props.signOut}/>
         </div>
     );
     const login = (

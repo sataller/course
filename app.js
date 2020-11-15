@@ -19,8 +19,8 @@ app.use('https://s3.console.aws.amazon.com/s3/buckets/courseprojectbucket?region
     express.static('uploads'));
 app.use(express.json());
 
-app.use('/auth', authRotes);
-app.use('/history', historyRotes);
-app.use('/users', userRotes);
+app.use('/api/auth', authRotes);
+app.use('/api/history', historyRotes);
+app.use('/api/users', userRotes);
 
 module.exports = app;

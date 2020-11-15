@@ -5,14 +5,12 @@ const SHOW_MESSAGE = "network/auth/SHOW_MESSAGE";
 
 
 let initialization = {
-    users: [],
     isAuth: false,
     authUser: null,
-    selectedUsersId: [],
     message: null,
 };
 
-const userReducer = (state = initialization, action) => {
+const authReducer = (state = initialization, action) => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -27,12 +25,11 @@ const userReducer = (state = initialization, action) => {
                 isAuth: false,
             };
         case SHOW_MESSAGE:
+            debugger
             return {
                 ...state,
                 message: action.message,
             };
-        case SET_USERS:
-            return {};
         default:
             return state
     }
@@ -48,17 +45,17 @@ export const signOut = () => (dispatch) => {
 };
 
 export const signIn = (email, password) => async (dispatch) => {
-    fetch('/auth/login', {
+    fetch('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({email, password}),
         headers: {
             "Content-type": "application/json",
-            // "Authorization": localStorage.getItem('Authorization')
         }
     })
         .then(response => response.json()).then(data => {
         if (data.resultCode === 0) {
             localStorage.setItem('Authorization', data.token);
+            localStorage.setItem('them', data.user.them);
             dispatch(login(data.user));
         } else {
             dispatch(message(data.message));
@@ -66,13 +63,31 @@ export const signIn = (email, password) => async (dispatch) => {
         }
     })
 };
+
+export const getAuthUserData = () => async (dispatch) => {
+    fetch('/api/auth/me', {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    })
+        .then(response => response.json()).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(login(data.user));
+            localStorage.setItem('them', data.user.them);
+        } else {
+            dispatch(message(data.message));
+        }
+    })
+};
+
 export const signUp = (email, name, password) => async (dispatch) => {
-    fetch('/auth/register', {
+    fetch('/api/auth/register', {
         method: 'POST',
         body: JSON.stringify({email, name, password}),
         headers: {
             "Content-type": "application/json",
-            // "Authorization": localStorage.getItem('Authorization')
         }
     })
         .then(response => response.json()).then(data => {
@@ -87,4 +102,4 @@ export const signUp = (email, name, password) => async (dispatch) => {
 };
 
 
-export default userReducer;
+export default authReducer;

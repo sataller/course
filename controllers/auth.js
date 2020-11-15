@@ -6,27 +6,27 @@ const mailer = require('../middleware/nodemailer');
 const errorHandler = require('../utils/errorHandler');
 
 module.exports.login = async function (req, res) {
-    const condidate = await User.findOne({email: req.body.email});
-    console.log(condidate.confirm);
-    if (condidate) {
-        if (condidate.confirm) {
-            if (condidate.status) {
-                const passwordResult = bcrypt.compareSync(req.body.password, condidate.password);
+    const candidate = await User.findOne({email: req.body.email});
+    console.log(candidate.confirm);
+    if (candidate) {
+        if (candidate.confirm) {
+            if (candidate.status) {
+                const passwordResult = bcrypt.compareSync(req.body.password, candidate.password);
                 if (passwordResult) {
                     const token = jwt.sign({
-                        name: condidate.name,
-                        role: condidate.role,
-                        them: condidate.them,
-                        userId: condidate._id
-                    }, keys.jwt, {expiresIn: 60 * 60});
+                        name: candidate.name,
+                        role: candidate.role,
+                        them: candidate.them,
+                        userId: candidate._id
+                    }, keys.jwt, {expiresIn: 135 * 135});
                     res.status(200).json({
                         token: `Bearer ${token}`,
                         user: {
-                            id: condidate._id,
-                            name: condidate.name,
-                            role: condidate.role,
-                            status: condidate.status,
-                            them: condidate.them,
+                            id: candidate._id,
+                            name: candidate.name,
+                            role: candidate.role,
+                            status: candidate.status,
+                            them: candidate.them,
                         },
                         resultCode: 0,
                     });
@@ -58,8 +58,8 @@ module.exports.login = async function (req, res) {
 };
 
 module.exports.register = async function (req, res) {
-    const condidate = await User.findOne({email: req.body.email});
-    if (condidate) {
+    const candidate = await User.findOne({email: req.body.email});
+    if (candidate) {
         res.status(409).json({message: "Email is busy", resultCode: 1});
     } else {
         const salt = bcrypt.genSaltSync(10);
@@ -86,7 +86,7 @@ module.exports.register = async function (req, res) {
         try {
             await user.save();
             mailer.mailer(mailOptions);
-            res.redirect("http://localhost:3000/auth/complete")
+            res.redirect("auth/complete")
         } catch (e) {
             errorHandler(res, e);
         }
@@ -110,7 +110,25 @@ module.exports.confirm = async function (req, res) {
                 useFindAndModify: false
             }
         );
-        res.redirect("http://localhost:3000/auth/confirmed");
+        res.redirect("/auth/confirmed");
+    } catch (e) {
+        errorHandler(res, e);
+    }
+};
+
+module.exports.initialization = async function (req, res) {
+    try {
+        const candidate = await User.findById(req.user._id);
+        res.status(200).json({
+            user: {
+                id: candidate._id,
+                name: candidate.name,
+                role: candidate.role,
+                status: candidate.status,
+                them: candidate.them,
+            },
+            resultCode: 0
+        });
     } catch (e) {
         errorHandler(res, e);
     }

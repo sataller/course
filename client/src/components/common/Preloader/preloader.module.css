@@ -1,0 +1,30 @@
+.preload {
+    overflow: hidden;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    margin: 0 auto;
+}
+
+.preload img {
+
+    max-width: none;
+
+    min-width: auto;
+    min-height: auto;
+
+    height: 100%;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+

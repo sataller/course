@@ -9,7 +9,7 @@ const SignUp = (props) => {
     const onSubmit = (data) => {
         props.signUp(data.email, data.name, data.password);
         alert(props.message)
-    }
+    };
     return (
         <div className={styles.wrapper}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>

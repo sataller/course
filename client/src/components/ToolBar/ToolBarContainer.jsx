@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import ToolBar from "./ToolBar";
-import {deleteUser, signOut, updateUserStatus} from "../../redux/adminReducer";
+import {deleteUser, signOut} from "../../redux/adminReducer";
+import {updateUser} from "../../redux/userReducer";
 
 class ToolBarContainer extends React.Component {
     render() {
         return (
             <div>
-                <ToolBar updateUserStatus={this.props.updateUserStatus}
+                <ToolBar updateUser={this.props.updateUser}
                          updateUserStatus={this.props.updateUserStatus}
                          deleteUser={this.props.deleteUser} signOut={this.props.signOut}
+                         authUser={this.props.authUser}
                          selectedUsersId={this.props.selectedUsersId}/>
             </div>
         )
@@ -17,11 +19,12 @@ class ToolBarContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    selectedUsersId: state.adminPage.selectedUsersId,
+    selectedUsersId: state.userPage.selectedUsersId,
+    authUser: state.authPage.authUser,
 
 })
 
-export default connect(mapStateToProps, {updateUserStatus, signOut, deleteUser})(ToolBarContainer)
+export default connect(mapStateToProps, {updateUser, signOut, deleteUser})(ToolBarContainer)
 
 
 

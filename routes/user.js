@@ -8,6 +8,6 @@ passportAuth = passport.authenticate('jwt', {"session": false});
 router.get('/:userId', passportAuth, controller.getByUserId);
 router.get('/', passportAuth, controller.getUsers);
 router.patch('/:userId', passportAuth, controller.update);
-router.delete('/:userId', passportAuth, controller.remove);
+router.delete('/', passportAuth, controller.remove);
 
 module.exports = router;
