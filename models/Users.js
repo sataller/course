@@ -37,6 +37,10 @@ const usersSchema = new Schema([
             type: Boolean,
             default: false,
         },
+        description: {
+            type: String,
+            default: "",
+        },
     }
 ]);
 

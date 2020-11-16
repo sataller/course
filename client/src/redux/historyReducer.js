@@ -1,5 +1,3 @@
-import {getAuthUserData} from "./authReducer";
-
 const SET_HISTORIES = "network/auth/SET_HISTORIES";
 const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
 // const SET_USER = "network/auth/SET_USER";
@@ -25,9 +23,14 @@ const historyReducer = (state = initialization, action) => {
             return {
                 ...state,
                 histories: state.histories.map(i => {
-                    if (i._id === action.history._id) {
-                        return action.history;
+                    if (action.history) {
+                        if (i._id === action.history._id) {
+                            return action.history;
+                        } else {
+                            return i
+                        }
                     } else {
+                        i.author = action.user.name;
                         return i
                     }
                 }),
@@ -102,6 +105,21 @@ export const updateHistory = (historyData) => (dispatch) => {
     })
         .then(response => response.json()).then(data => {
         dispatch(refreshHistory(data.history));
+    })
+};
+export const updateHistoryAuthor = (historyData) => (dispatch) => {
+    fetch(`/api/history/`, {
+        method: 'PATCH',
+        body: JSON.stringify({...historyData}),
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    })
+        .then(response => response.json()).then(data => {
+        debugger
+
+        console.log(data)
     })
 };
 //

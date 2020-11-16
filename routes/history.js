@@ -11,6 +11,7 @@ router.get('/:userId', controller.getUserHistories);
 router.post('/', passportAuth, controller.create);
 router.get('/:historyId', passportAuth, controller.getHistory);
 router.patch('/:historyId', passportAuth, controller.update);
+router.patch('/', passportAuth, controller.updateAuthor);
 router.post('/:historyId/chapter', passportAuth, upload.upload, controller.createChapter);
 router.patch('/:historyId/:chapterId', passportAuth, upload.upload, controller.updateChapter);
 router.post('/:historyId/comments', passportAuth, controller.createComment);

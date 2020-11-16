@@ -7,6 +7,7 @@ module.exports.getByUserId = async function (req, res) {
         const user = await User.findById(req.params.userId);
         res.status(200).json({
             user: {
+                id: user._id,
                 name: user.name,
                 status: user.status,
                 email: user.email,
@@ -14,6 +15,7 @@ module.exports.getByUserId = async function (req, res) {
                 them: user.them,
                 confirm: user.confirm,
                 registerDate: user.registerDate,
+                description: user.description,
             },
             resultCode: 0
         });
@@ -34,6 +36,7 @@ module.exports.getUsers = async function (req, res) {
                     them: i.them,
                     confirm: i.confirm,
                     registerDate: i.registerDate,
+                    description: i.description,
                     id: i._id,
                 })
             }
@@ -54,6 +57,7 @@ module.exports.update = async function (req, res) {
         password: req.body.password ? req.body.password : user.password,
         role: req.body.role ? req.body.role : user.role,
         them: req.body.them ? req.body.them : user.them,
+        description: req.body.description?req.body.description:user.description,
         confirm: user.confirm,
     };
     try {
@@ -74,6 +78,7 @@ module.exports.update = async function (req, res) {
                 them: user.them,
                 confirm: user.confirm,
                 registerDate: user.registerDate,
+                description:user.description,
                 id: user._id,
             }, resultCode: 0
         });

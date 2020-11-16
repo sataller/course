@@ -88,6 +88,7 @@ export const updateUser = (userData) => (dispatch) => {
         .then(response => response.json()).then(data => {
         dispatch(getAuthUserData());
         dispatch(refreshUser(data.user));
+        dispatch(setUser(data.user));
     })
 };
 

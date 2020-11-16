@@ -47,8 +47,8 @@ module.exports.create = async function (req, res) {
             description: req.body.description ? req.body.description : "here will be a description",
             title: req.body.title ? req.body.title : "here will be the title",
             author: {
-            user:req.userId,
-            userName:req.userName,
+                user: req.userId,
+                userName: req.userName,
             },
             rating: {
                 user: req.user,
@@ -71,6 +71,7 @@ module.exports.update = async function (req, res) {
         rating: updateObj.updateRate(req.user, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
+        author: req.body.author ? req.body.author : history.author,
         // updateDate: new Date.now,
     };
     try {
@@ -88,6 +89,28 @@ module.exports.update = async function (req, res) {
     }
 };
 
+module.exports.updateAuthor = async function (req, res) {
+    const update = {
+        author: {
+            userName: req.body.name,
+            user: req.body.userId,
+        },
+    };
+    try {
+        const histories = await History.updateMany(
+            {
+                "author.user": {
+                    $eq: req.body.userId,
+                }
+            },
+            {$set: update}
+        );
+        res.status(200).json({histories, resultCode: 0});
+    } catch (e) {
+        errorHandler(res, e);
+    }
+};
+
 module.exports.updateChapter = async function (req, res) {
     const history = await History.findById(req.params.historyId);
     const update = {
@@ -95,6 +118,7 @@ module.exports.updateChapter = async function (req, res) {
         title: history.title,
         like: history.like,
         rating: history.rating,
+        author: history.author,
         tags: history.tags,
         chapters: updateObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
     };
