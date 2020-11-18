@@ -71,7 +71,6 @@ export const updateUser = (userData) => (dispatch) => {
         method: 'PATCH',
         body: JSON.stringify({...userData}),
         headers: {
-           " Content-Security-Policy": "default-src 'self'; script-src https://static.ads-twitter.com https://www.google-analytics.com; img-src 'self' https://s3.amazonaws.com https://twitter.com https://pbs.twimg.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com; frame-ancestors 'none';",
             "Content-type": "application/json",
             "Authorization": localStorage.getItem('Authorization')
         }
@@ -92,7 +91,6 @@ export const getUser = (userId) => (dispatch) => {
     fetch(`/api/users/${userId}`, {
         method: 'GET',
         headers: {
-            " Content-Security-Policy": "default-src 'self'; script-src https://static.ads-twitter.com https://www.google-analytics.com; img-src 'self' https://s3.amazonaws.com https://twitter.com https://pbs.twimg.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com; frame-ancestors 'none';",
             "Content-type": "application/json",
             "Authorization": localStorage.getItem('Authorization')
         }

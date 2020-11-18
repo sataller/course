@@ -1,12 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const helmet = require('helmet')
 const path = require('path');
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
+
+app.use(
+    // [
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", 'https://checkout.stripe.com'],
+            frameSrc: ["'self'", 'https://checkout.stripe.com'],
+            childSrc: ["'self'", 'https://checkout.stripe.com'],
+            scriptSrc: ["'self'", 'https://checkout.stripe.com'],
+            styleSrc: [
+                "'self'",
+                'https://fonts.googleapis.com',
+                'https://checkout.stripe.com',
+            ],
+            fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+            imgSrc: ["'self'", 'https://*.stripe.com', 'https://res.cloudinary.com'],
+            baseUri: ["'self'"],
+        },
+    })
+    // ]
+)
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
