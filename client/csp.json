@@ -3,18 +3,18 @@
     "default-src": ["'self'"],
     "style-src": [
       "'self'",
-      "https://*.google.com"
+      "https://fanficforumweb.herokuapp.com"
     ]
   },
   "prod": {
     "default-src": "'self'",
     "style-src": [
       "'self'",
-      "https://*.facebook.com"
+      "https://fanficforumweb.herokuapp.com"
     ],
     "connect-src": [
       "'self'",
-      "https://mybackend.com"
+      "https://fanficforumweb.herokuapp.com"
     ]
   }
 }
