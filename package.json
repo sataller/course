@@ -12,6 +12,7 @@
     "concurrently": "^5.3.0",
     "content-security-policy": "^0.3.4",
     "express": "^4.17.1",
+    "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongodb": "^3.6.3",

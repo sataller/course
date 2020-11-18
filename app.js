@@ -2,12 +2,26 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
+const helmet = require('helmet');
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
 
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "example.com"],
+            objectSrc: ["'none'"],
+            upgradeInsecureRequests: [],
+            "default-src": ["'self'"],
+            "script-src": ["'self'", "example.com"],
+            "object-src": ["'none'"],
+        },
+    })
+);
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
     {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
