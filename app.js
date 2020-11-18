@@ -23,4 +23,9 @@ app.use('/api/auth', authRotes);
 app.use('/api/history', historyRotes);
 app.use('/api/users', userRotes);
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + 'client/build', 'index.html'));
+});
+
 module.exports = app;
