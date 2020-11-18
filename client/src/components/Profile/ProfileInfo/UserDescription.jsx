@@ -29,10 +29,10 @@ const UserDescription = (props) => {
                 <span>
                     {props.userProfile.description}
                 </span>
-                <span className={styles.icon}>
+               {props.myPage && <span className={styles.icon}>
                     <CreateIcon titleAccess={"Click to redact"}
                                 onClick={activateEditDescription} fontSize="small"/>
-                </span>
+                </span>}
             </div>}
             {editDescription &&
             <div>

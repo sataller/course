@@ -6,7 +6,14 @@ import UserName from "./ProfileInfo/UserName";
 import UserDescription from "./ProfileInfo/UserDescription";
 
 const Profile = (props) => {
-
+    let myPage;
+    if (!props.authUser) {
+        myPage = false;
+    } else if (props.authUser.id === props.userProfile.id || props.authUser.role === "admin") {
+        myPage = true;
+    } else {
+        myPage = false;
+    }
 
     const items = props.histories.map(i => <Item id={i._id} key={i._id} name={i.name}
                                                  title={i.title} author={i.author} description={i.description}
@@ -21,8 +28,9 @@ const Profile = (props) => {
             <div className={styles.userInfo}>
                 <UserName updateHistoryAuthor={props.updateHistoryAuthor}
                           updateUser={props.updateUser}
-                          userProfile={props.userProfile}/>
-                <UserDescription updateUser={props.updateUser} userProfile={props.userProfile}/>
+                          userProfile={props.userProfile} myPage={myPage}/>
+                <UserDescription updateUser={props.updateUser} userProfile={props.userProfile}
+                                 myPage={myPage}/>
             </div>
             <div className={styles.items}>
                 {items}

@@ -1,6 +1,6 @@
 const SET_HISTORIES = "network/auth/SET_HISTORIES";
 const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
-// const SET_USER = "network/auth/SET_USER";
+const SET_HISTORY = "network/auth/SET_HISTORY";
 // const SET_SELECT_OLL = "network/auth/SET_SELECT_OLL";
 // const REMOVE_OLL = "network/auth/REMOVE_OLL";
 // const SELECT_USER = "network/auth/SELECT_USER";
@@ -8,6 +8,7 @@ const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
 
 let initialization = {
     histories: [],
+    history: null,
     selectedUsersId: [],
     userProfile: null,
 }
@@ -35,11 +36,11 @@ const historyReducer = (state = initialization, action) => {
                     }
                 }),
             };
-        // case SELECT_USER:
-        //     return {
-        //         ...state,
-        //         selectedUsersId: [...state.selectedUsersId, action.id],
-        //     };
+        case SET_HISTORY:
+            return {
+                ...state,
+                history: action.history,
+            };
         // case SET_USER:
         //     return {
         //         ...state,
@@ -58,7 +59,7 @@ const historyReducer = (state = initialization, action) => {
 
 export const initializeHistories = (histories) => ({type: SET_HISTORIES, histories});
 export const refreshHistory = (history) => ({type: UPDATE_HISTORY, history});
-// export const addSelectUser = (id) => ({type: SELECT_USER, id});
+export const setHistory = (history) => ({type: SET_HISTORY, history});
 // export const removeSelectUser = (id) => ({type: REMOVE_SELECT_USER, id});
 // export const setUser = (user) => ({type: SET_USER, user});
 
@@ -93,6 +94,22 @@ export const setHistories = () => (dispatch) => {
         }
     })
 };
+export const setReadableHistory = (historyId) => (dispatch) => {
+    fetch(`/api/history/read/${historyId}`, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    }).then(response => response.json()).then(data => {
+        if (data.resultCode === 0) {
+            debugger
+            dispatch(setHistory(data.history))
+        } else {
+            alert(data.err)
+        }
+    });
+};
 
 export const updateHistory = (historyData) => (dispatch) => {
     fetch(`/api/history/${historyData.historyId}`, {
@@ -104,13 +121,35 @@ export const updateHistory = (historyData) => (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
-        dispatch(refreshHistory(data.history));
+        if (data.resultCode === 0) {
+            dispatch(refreshHistory(data.history));
+            dispatch(setHistory(data.history));
+        } else {
+            alert(data.message);
+        }
     })
 };
 export const updateHistoryAuthor = (historyData) => (dispatch) => {
     fetch(`/api/history/`, {
         method: 'PATCH',
         body: JSON.stringify({...historyData}),
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    })
+        .then(response => response.json()).then(data => {
+        if (data.resultCode === 0) {
+        } else {
+            alert(data.message);
+        }
+    })
+};
+// chapterName !!!
+export const updateChapter = (chapterData) => (dispatch) => {
+    fetch(`/api/history/chapter/${chapterData.historyId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({...chapterData}),
         headers: {
             "Content-type": "application/json",
             "Authorization": localStorage.getItem('Authorization')

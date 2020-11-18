@@ -1,28 +1,31 @@
 import React from "react"
-import Profile from "./Profile";
+import HistoryPage from "./HistoryPage";
 import {connect} from "react-redux";
-import {getUser, updateUser} from "../../redux/userReducer";
-import {setUserHistories, updateHistory, updateHistoryAuthor} from "../../redux/historyReducer";
+import {
+    setReadableHistory,
+    setUserHistories, updateChapter,
+    updateHistory,
+    updateHistoryAuthor
+} from "../../redux/historyReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 
-class ProfileContainer extends React.Component {
-
-    componentDidMount() {
-        this.props.setUserHistories(this.props.match.params.userId);
-        this.props.getUser(this.props.match.params.userId);
-
-    };
+class HistoryPageContainer extends React.Component {
+ componentDidMount() {
+     this.props.setReadableHistory(this.props.match.params.historyId);
+ }
 
     render() {
-        if (!this.props.userProfile) {
+        if (!this.props.readableHistory){
             return <Preloader/>
         }
         return (
-            <Profile userProfile={this.props.userProfile} histories={this.props.histories}
-                     updateUser={this.props.updateUser} authUser={this.props.authUser}
-                     updateHistoryAuthor={this.props.updateHistoryAuthor}
-                     updateHistory={this.props.updateHistory}/>
+            <div>
+                <HistoryPage authUser={this.props.authUser}
+                             updateHistory={this.props.updateHistory}
+                             updateChapter={this.props.updateChapter}
+                             history={this.props.readableHistory}/>
+            </div>
         )
 
     }
@@ -31,12 +34,13 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
     authUser: state.authPage.authUser,
     userProfile: state.userPage.userProfile,
-    histories: state.historyPage.histories,
+    readableHistory: state.historyPage.history,
 });
-let WithRouterProfileContainer = withRouter(ProfileContainer)
+
+let WithRouterHistoryPageContainer = withRouter(HistoryPageContainer)
 
 export default connect(mapStateToProps, {
-    getUser, updateUser,
     updateHistory, updateHistoryAuthor,
-    setUserHistories
-})(WithRouterProfileContainer)
+    setUserHistories, setReadableHistory,
+    updateChapter
+})(WithRouterHistoryPageContainer)

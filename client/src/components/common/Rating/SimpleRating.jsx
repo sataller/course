@@ -3,8 +3,8 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
 export default function SimpleRating(props) {
-    const [value, setValue] = React.useState(props.rating);
 
+    const [value, setValue] = React.useState(props.rating);
     return (
         <div>
             <Box component="fieldset" mb={3} borderColor="transparent"

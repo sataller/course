@@ -6,10 +6,12 @@ import {Redirect} from "react-router-dom";
 
 const UserPage = (props) => {
 
-    if (localStorage.getItem('Authorization') === null) {
+    if (!props.authUser)  {
+    } else if (localStorage.getItem('Authorization') === null ) {
         return <Redirect to="auth/login"/>
-    } else if (!props.authUser) {
-    } else if (props.authUser.role !== "admin") {
+    } else if (props.authUser.status !== true) {
+        props.signOut();
+    }else if (props.authUser.role !== "admin") {
         return <Redirect to="/main"/>
     }
     const usersElement = props.users.map(i => <UserItem id={i.id} email={i.email}

@@ -9,33 +9,32 @@ import style from "../historyPage.module.css";
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 const ChapterEditor = (props) => {
-    // const mdEditor = React.useRef(null);
+    const mdEditor = React.useRef(null);
 
     const [body, setBody] = useState(props.body);
 
-const handleEditorChange = ({html, text}) => {
-    setBody(text)
+    const handleEditorChange = ({html, text}) => {
+        setBody(text)
     };
 
-    const handleClick = (e) => {
-        // if (mdEditor.current) {
-        //     alert(mdEditor.current.getMdValue());
-        // }
-        console.log(e)
+    const handleClick = () => {
+        if (mdEditor.current) {
+            alert(mdEditor.current.getMdValue());
+        }
     };
 
     return (
         <>
-            <Button variant="outline-dark" className={style.button}
-                   onClick={handleClick}>Save</Button>
             <MdEditor
-                // ref={mdEditor}
+                ref={mdEditor}
                 value={body}
-                style={{ height: "80%", textAlign: "center"}}
+                style={{height: "80%", textAlign: "center"}}
                 renderHTML={(text) => mdParser.render(text)}
                 onChange={handleEditorChange}
             />
-            </>
+            <Button variant="outline-dark" className={style.button}
+                    onClick={handleClick}>Save</Button>
+        </>
     )
 };
 

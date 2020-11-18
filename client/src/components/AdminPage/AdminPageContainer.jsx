@@ -3,7 +3,7 @@ import styles from "./userPage.module.css"
 import UserPage from "./UserPage";
 import {connect} from "react-redux";
 import ToolBarContainer from "../ToolBar/ToolBarContainer";
-import {getAuthUserData} from "../../redux/authReducer";
+import {getAuthUserData, signOut} from "../../redux/authReducer";
 import {setUsers, deleteUser, updateUser} from "../../redux/userReducer";
 
 class AdminPageContainer extends React.Component {
@@ -18,7 +18,7 @@ componentDidMount() {
                 <ToolBarContainer/>
                 <UserPage authUser={this.props.authUser} setSelect={this.props.setSelect}
                           updateUser={this.props.updateUser} users={this.props.users}
-                          deleteUser={this.props.deleteUser}/>
+                          deleteUser={this.props.deleteUser} signOut={this.props.signOut}/>
             </div>
         )
     }
@@ -30,4 +30,4 @@ let mapStateToProps = (state) => ({
     authUser: state.authPage.authUser,
 });
 
-export default connect(mapStateToProps, {getAuthUserData, setUsers, updateUser, deleteUser})(AdminPageContainer)
+export default connect(mapStateToProps, {getAuthUserData, setUsers, signOut, updateUser, deleteUser})(AdminPageContainer)

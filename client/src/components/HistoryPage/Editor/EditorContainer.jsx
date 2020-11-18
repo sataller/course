@@ -1,19 +1,14 @@
 import React from "react"
-import HistoryPage from "./HistoryPage";
 import {connect} from "react-redux";
-import {
-    setReadableHistory,
-    setUserHistories, updateChapter,
-    updateHistory,
-    updateHistoryAuthor
-} from "../../redux/historyReducer";
 import {withRouter} from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
+import ChapterEditor from "./ChapterEditor";
+import {updateChapter} from "../../../redux/historyReducer";
+import Preloader from "../../common/Preloader/Preloader";
 
-class HistoryPageContainer extends React.Component {
- componentDidMount() {
-     this.props.setReadableHistory(this.props.match.params.historyId);
- }
+class EditorContainer extends React.Component {
+ // componentDidMount() {
+ //     this.props.setReadableHistory(this.props.match.params.historyId);
+ // }
 
     render() {
         if (!this.props.readableHistory){
@@ -21,10 +16,7 @@ class HistoryPageContainer extends React.Component {
         }
         return (
             <div>
-                <HistoryPage authUser={this.props.authUser}
-                             updateHistory={this.props.updateHistory}
-                             updateChapter={this.props.updateChapter}
-                             history={this.props.readableHistory}/>
+                <ChapterEditor updateChapter={this.props.updateChapter}/>
             </div>
         )
 
@@ -32,15 +24,11 @@ class HistoryPageContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    authUser: state.authPage.authUser,
-    userProfile: state.userPage.userProfile,
     readableHistory: state.historyPage.history,
 });
 
-let WithRouterHistoryPageContainer = withRouter(HistoryPageContainer)
+let WithRouterHistoryPageContainer = withRouter(EditorContainer)
 
 export default connect(mapStateToProps, {
-    updateHistory, updateHistoryAuthor,
-    setUserHistories, setReadableHistory,
     updateChapter
 })(WithRouterHistoryPageContainer)

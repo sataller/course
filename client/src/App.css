@@ -5,6 +5,7 @@
 .night {
     background: url("./assets/nightMode.jpg");
     background-attachment: fixed;
+    /*background-color: #3B3355;*/
     color: white;
 }
 
@@ -12,6 +13,7 @@
     color: black;
     background-image: url("./assets/day.jpg");
     background-attachment: fixed;
+    /*background-color: #FEE9E1;*/
 }
 
 

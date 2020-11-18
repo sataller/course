@@ -35,7 +35,10 @@ module.exports.getUserHistories = async function (req, res) {
 module.exports.getHistory = async function (req, res) {
     try {
         const history = await History.findById(req.params.historyId);
-        res.status(200).json({history, resultCode: 0})
+        res.status(200).json({
+            history,
+            resultCode: 0
+        })
     } catch (e) {
         errorHandler(res, e);
     }
@@ -72,7 +75,6 @@ module.exports.update = async function (req, res) {
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
         author: req.body.author ? req.body.author : history.author,
-        // updateDate: new Date.now,
     };
     try {
         const history = await History.findOneAndUpdate(
@@ -120,7 +122,7 @@ module.exports.updateChapter = async function (req, res) {
         rating: history.rating,
         author: history.author,
         tags: history.tags,
-        chapters: updateObj.updateChapter(req.params.chapterId, history.chapters, req.body, req.file),
+        chapters: updateObj.updateChapter(req.body.chapterName, history.chapters, req.body, req.file),
     };
     try {
         const history = await History.findOneAndUpdate(

@@ -1,30 +1,57 @@
 .content {
-    display:grid;
-    grid-template-rows: 1fr 1fr 8fr;
+    display: inline-grid;
+    color: orange;
+    grid-template-rows: 0.1fr 0.1fr 0.1fr 1fr 0.1fr;
     grid-template-columns: 1fr;
-    grid-template-areas: "nav"
-                         "info"
-                         "items";
+    grid-template-areas: "nav" "itemInfo" "tableOfContents" "item" "comment";
 }
+
 .nav {
-    padding: 10px;
-    margin-left: 10px;
-    float: right;
     grid-area: nav;
 }
 
-.items {
-    grid-area: items;
+.item {
+    background-color: rgba(153, 153, 153, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+
+    grid-area: item;
 }
 
-.userInfo {
+.tableOfContents {
+    background-color: rgba(153, 153, 153, 0.3);
     border-radius: 10px;
-    background-color: rgba(169, 169, 169, 0.4);
+    padding: 10px;
+    margin: 20px;
+
+    grid-area: tableOfContents;
+}
+
+.itemInfo {
+    margin: 20px;
+    grid-area: itemInfo;
+}
+
+.comment {
+    background-color: rgba(153, 153, 153, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+
+    grid-area: comment;
+}
+
+.chapter {
+
+}
+
+.add {
+    cursor: pointer;
+}
+
+.icon a{
     color: orange;
-    padding: 20px;
-    margin-bottom: 10px;
-    grid-area: info;
-    width: 100%;
 }
 
 .icon{
@@ -33,20 +60,7 @@
     vertical-align: top;
 }
 
-.item{
-    border-radius: 10px;
-    background-color: rgba(169, 169, 169, 0.4);
-    color: orange;
-    padding: 20px;
-    margin-bottom: 10px;
-}
-
-.like{
-    cursor: pointer;
-}
-.rate{
-    font-size: small;
-    margin-left: 10px;
-    display: table-cell;
-    vertical-align: middle
+.button{
+    margin-left: 1%;
+    margin-top: 2%;
 }

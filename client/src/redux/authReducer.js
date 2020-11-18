@@ -1,7 +1,5 @@
-const SET_USERS = "network/auth/SET_USER_DATA";
 const LOGIN = "network/auth/LOGIN";
 const LOGOUT = "network/auth/LOGOUT";
-const SHOW_MESSAGE = "network/auth/SHOW_MESSAGE";
 
 
 let initialization = {
@@ -24,20 +22,13 @@ const authReducer = (state = initialization, action) => {
                 authUser: null,
                 isAuth: false,
             };
-        case SHOW_MESSAGE:
-            debugger
-            return {
-                ...state,
-                message: action.message,
-            };
         default:
             return state
     }
 };
 
 export const login = (user) => ({type: LOGIN, user});
-export const logOut = (user) => ({type: LOGOUT});
-export const message = (message) => ({type: SHOW_MESSAGE, message});
+export const logOut = () => ({type: LOGOUT});
 
 export const signOut = () => (dispatch) => {
     localStorage.removeItem('Authorization');
@@ -58,7 +49,7 @@ export const signIn = (email, password) => async (dispatch) => {
             localStorage.setItem('them', data.user.them);
             dispatch(login(data.user));
         } else {
-            dispatch(message(data.message));
+            alert(data.message);
             console.log(data);
         }
     })
@@ -77,7 +68,7 @@ export const getAuthUserData = () => async (dispatch) => {
             dispatch(login(data.user));
             localStorage.setItem('them', data.user.them);
         } else {
-            dispatch(message(data.message));
+            alert(data.message);
         }
     })
 };
@@ -93,10 +84,11 @@ export const signUp = (email, name, password) => async (dispatch) => {
         .then(response => response.json()).then(data => {
         if (data.resultCode === 0) {
             console.log(data);
-            dispatch(message(data.message));
+            alert(data.message);
         } else {
-            dispatch(message(data.message));
             console.log(data);
+            alert(data.message);
+
         }
     })
 };

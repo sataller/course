@@ -1,7 +1,6 @@
 import React from "react"
 import styles from "./historyItems.module.css"
 import Item from "./Item/Item";
-import {setUserHistories} from "../../../redux/historyReducer";
 
 const HistoryItems = (props) => {
 

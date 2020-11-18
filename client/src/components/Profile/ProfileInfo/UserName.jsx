@@ -4,6 +4,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import React, {useEffect, useState} from "react";
 
 const UserName = (props) => {
+
     const [editName, setEditName] = useState(false);
     const [name, setName] = useState(props.userProfile.name);
 
@@ -31,10 +32,10 @@ const UserName = (props) => {
                             {props.userProfile.name || "click and redact name"}
                         </span>
                     </NavLink>
-                        <span className={styles.icon}>
+                       {props.myPage && <span className={styles.icon}>
                             <CreateIcon titleAccess={"Click to redact"}
                                         onClick={activateEditName} fontSize="small"/>
-                        </span>
+                        </span>}
                     </span>
             }
             {editName && <input autoFocus={true} onBlur={deactivateEditName}
