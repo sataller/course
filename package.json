@@ -22,7 +22,7 @@
     "client": "cd client && npm run start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "react-scripts start",
-    "build": "cd course && npm run build",
+    "build": "cd client && npm run build",
     "startApp": "npm run build && node server.js"
   },
   "devDependencies": {
