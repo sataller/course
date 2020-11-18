@@ -12,7 +12,6 @@
     "concurrently": "^5.3.0",
     "content-security-policy": "^0.3.4",
     "express": "^4.17.1",
-    "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongodb": "^3.6.3",
@@ -21,9 +20,7 @@
     "multer-s3": "^2.9.0",
     "nodemailer": "^6.4.15",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "react-csp": "^1.1.0",
-    "uuidv4": "^6.2.5"
+    "passport-jwt": "^4.0.0"
   },
   "scripts": {
     "server": "nodemon server.js",
