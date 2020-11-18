@@ -14,14 +14,14 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: ["'self'"],
-            connectSrc: ["'self'", 'https://checkout.stripe.com'],
-            frameSrc: ["'self'", 'https://checkout.stripe.com'],
-            childSrc: ["'self'", 'https://checkout.stripe.com'],
-            scriptSrc: ["'self'", 'https://checkout.stripe.com'],
+            connectSrc: ["'self'", 'https://fanficforumweb.herokuapp.com'],
+            frameSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
+            childSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
+            scriptSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
             styleSrc: [
                 "'self'",
                 'https://fonts.googleapis.com',
-                'https://checkout.stripe.com',
+                'https://fanficforumweb.herokuapp.com/',
             ],
             fontSrc: ["'self'", 'https://fonts.gstatic.com'],
             imgSrc: ["'self'", 'https://*.stripe.com', 'https://res.cloudinary.com'],
