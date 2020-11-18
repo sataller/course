@@ -9,7 +9,6 @@ const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
 
-
 const cspPolicy = {
     'report-uri': '/reporting',
     'default-src': csp.SRC_NONE,

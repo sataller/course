@@ -5,6 +5,14 @@ import Box from '@material-ui/core/Box';
 export default function SimpleRating(props) {
 
     const [value, setValue] = React.useState(props.rating);
+
+    const onRatingChange = (event, newValue) => {
+        props.updateRating(newValue);
+        setValue(newValue);
+
+    };
+
+
     return (
         <div>
             <Box component="fieldset" mb={3} borderColor="transparent"
@@ -12,10 +20,7 @@ export default function SimpleRating(props) {
                 <Rating
                     name="simple-controlled"
                     value={value}
-                    onChange={(event, newValue) => {
-                        props.updateRating(newValue);
-                        setValue(newValue);
-                    }}
+                    onChange={onRatingChange}
                 />
             </Box>
         </div>

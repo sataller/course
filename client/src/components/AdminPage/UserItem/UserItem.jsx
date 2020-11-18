@@ -10,6 +10,12 @@ const UserItem = (props) => {
     const changeRole = (e) => {
         props.updateUser({userId: props.id, role: e.target.innerText})
     };
+    const setActiveUser = () => {
+      props.updateUser({userId: props.id, status: true})
+    };
+    const setBlockedUser = () => {
+      props.updateUser({userId: props.id, status: false})
+    };
     return (
         <tr>
             <td>{props.name}</td>
@@ -35,11 +41,11 @@ const UserItem = (props) => {
 
                     <Dropdown.Menu>
                         <Dropdown.Item value={true}
-                                       onClick={() => props.updateUser({userId: props.id, status: true})}>
+                                       onClick={setActiveUser}>
                             Active
                         </Dropdown.Item>
                         <Dropdown.Item value={false}
-                                       onClick={() => props.updateUser({userId: props.id, status: false})}>
+                                       onClick={setBlockedUser}>
                             Blocked
                         </Dropdown.Item>
                     </Dropdown.Menu>

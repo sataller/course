@@ -23,6 +23,10 @@ const MenuButton = (props) => {
         }
         props.updateUser({userId: props.authUser.id, them});
     };
+
+    const signOut = () =>{
+        props.signOut()
+    }
     return (
         <div className={styles.signButtons}>
             <DropdownButton className={styles.buttons} variant="outline-secondary"
@@ -32,7 +36,7 @@ const MenuButton = (props) => {
                 <Dropdown.Item href={`/profile/${props.authUser.id}`}>Profile</Dropdown.Item>
                 <Dropdown.Item onClick={changeThem}>Chang them</Dropdown.Item>
                 <Dropdown.Divider/>
-                <Dropdown.Item onClick={props.signOut}>Sign Out</Dropdown.Item>
+                <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
             </DropdownButton>
         </div>
     )
