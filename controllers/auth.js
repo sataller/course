@@ -75,7 +75,7 @@ module.exports.register = async function (req, res) {
             html: `
     <h2>You have successfully registered on the site</h2>
     <span>Now you need to confirm your email address. To confirm, click
-     <a href="http://127.0.0.1:5000/auth/confirm/${user._id}">
+     <a href="https://fanficforumweb.herokuapp.com/auth/confirm/${user._id}">
      here
       </a>
       and login
