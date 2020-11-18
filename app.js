@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const path = require('path');
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
-const passport = require('passport');
 const app = express();
+
 
 
 const url = process.env.MONGO_URL || keys.mongoURI;
