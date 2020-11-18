@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./toolBar.module.css"
-import ToolButtons from "../Navbar/NavComponents/ToolButtons";
 import SearchBlock from "../Navbar/NavComponents/SearchBlock";
 import MenuButton from "../Navbar/NavComponents/MenuButton";
 
