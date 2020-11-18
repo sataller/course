@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const helmet = require('helmet')
+const csp = require('content-security-policy');
 const path = require('path');
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
@@ -9,27 +9,18 @@ const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
 
-app.use(
-    // [
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
-            connectSrc: ["'self'", 'https://fanficforumweb.herokuapp.com'],
-            frameSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
-            childSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
-            scriptSrc: ["'self'", 'https://fanficforumweb.herokuapp.com/'],
-            styleSrc: [
-                "'self'",
-                'https://fonts.googleapis.com',
-                'https://fanficforumweb.herokuapp.com/',
-            ],
-            fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-            imgSrc: ["'self'", 'https://*.stripe.com', 'https://res.cloudinary.com'],
-            baseUri: ["'self'"],
-        },
-    })
-    // ]
-)
+
+const cspPolicy = {
+    'report-uri': '/reporting',
+    'default-src': csp.SRC_NONE,
+    'script-src': [ csp.SRC_SELF, csp.SRC_DATA ]
+};
+
+const globalCSP = csp.getCSP(csp.STARTER_OPTIONS);
+const localCSP = csp.getCSP(cspPolicy);
+
+// This will apply this policy to all requests if no local policy is set
+app.use(globalCSP);
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
