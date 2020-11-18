@@ -1,0 +1,52 @@
+.content {
+    display:grid;
+    grid-template-rows: 1fr 1fr 8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "nav"
+                         "info"
+                         "items";
+}
+.nav {
+    padding: 10px;
+    margin-left: 10px;
+    float: right;
+    grid-area: nav;
+}
+
+.items {
+    grid-area: items;
+}
+
+.userInfo {
+    border-radius: 10px;
+    background-color: rgba(169, 169, 169, 0.4);
+    color: orange;
+    padding: 20px;
+    margin-bottom: 10px;
+    grid-area: info;
+    width: 100%;
+}
+
+.icon{
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.item{
+    border-radius: 10px;
+    background-color: rgba(169, 169, 169, 0.4);
+    color: orange;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.like{
+    cursor: pointer;
+}
+.rate{
+    font-size: small;
+    margin-left: 10px;
+    display: table-cell;
+    vertical-align: middle
+}

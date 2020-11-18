@@ -1,0 +1,38 @@
+.content {
+    display: grid;
+    color: orange;
+    grid-template-rows: 1fr 1fr 3fr 1fr;
+    /*grid-template-columns:  1fr;*/
+    grid-template-areas: "nav" "itemInfo" "item" "coment";
+}
+
+.nav {
+    grid-area: nav;
+}
+
+.item {
+    background-color: rgba(153,153,153,0.3);
+border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+
+    grid-area: item;
+}
+
+.itemInfo {
+    background-color: rgba(153,153,153,0.3);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+
+    grid-area: itemInfo;
+}
+
+.comment {
+    background-color: rgba(153,153,153,0.3);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+
+    grid-area: coment;
+}
