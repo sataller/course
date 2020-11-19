@@ -26,7 +26,8 @@ const MenuButton = (props) => {
 
     const signOut = () =>{
         props.signOut()
-    }
+    };
+
     return (
         <div className={styles.signButtons}>
             <DropdownButton className={styles.buttons} variant="outline-secondary"

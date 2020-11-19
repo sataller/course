@@ -2,27 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
-const helmet = require('helmet');
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
-
-// app.use(
-//     helmet.contentSecurityPolicy({
-//         directives: {
-//             "default-src": ["'self'"],
-//             "script-src": ["'self'", "example.com"],
-//             "object-src": ["'none'"],
-//         },
-//     })
-// );
-
-// app.use(function(req, res, next) {
-//     res.setHeader("Content-Security-Policy", "default-src 'self' https://fanficforumweb.herokuapp.com/");
-//     return next();
-// });
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
@@ -48,9 +32,5 @@ if (process.env.NODE_ENV === "production") {
             'index.html'));
     });
 }
-// app.use(express.static(path.join(__dirname, 'client/build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname + 'client/build', 'index.html'));
-// });
 
 module.exports = app;
