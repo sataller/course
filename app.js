@@ -19,10 +19,10 @@ const app = express();
 //     })
 // );
 
-app.use(function(req, res, next) {
-    res.setHeader("Content-Security-Policy", "default-src 'self' https://fanficforumweb.herokuapp.com/");
-    return next();
-});
+// app.use(function(req, res, next) {
+//     res.setHeader("Content-Security-Policy", "default-src 'self' https://fanficforumweb.herokuapp.com/");
+//     return next();
+// });
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
