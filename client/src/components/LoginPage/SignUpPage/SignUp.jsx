@@ -30,7 +30,7 @@ const SignUp = (props) => {
                                   placeholder="Password"/>
                 </Form.Group>
 
-                <Button variant="outline-secondary" type="submit" type="submit">Sign Up</Button>{' '}
+                <Button variant="outline-secondary" type="submit">Sign Up</Button>{' '}
                 <div className={styles.text}>
                     <h6> Have Account? <NavLink to="/auth/login"> Login </NavLink></h6>
                 </div>

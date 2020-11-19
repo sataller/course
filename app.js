@@ -12,16 +12,18 @@ const app = express();
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "example.com"],
-            objectSrc: ["'none'"],
-            upgradeInsecureRequests: [],
             "default-src": ["'self'"],
             "script-src": ["'self'", "example.com"],
             "object-src": ["'none'"],
         },
     })
 );
+
+// app.use(function(req, res, next) {
+//     res.setHeader("Content-Security-Policy", "script-src 'self' https://apis.google.com");
+//     return next();
+// });
+
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
     {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
