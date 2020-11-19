@@ -9,15 +9,15 @@ const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
 
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            "default-src": ["'self'"],
-            "script-src": ["'self'", "example.com"],
-            "object-src": ["'none'"],
-        },
-    })
-);
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             "default-src": ["'self'"],
+//             "script-src": ["'self'", "example.com"],
+//             "object-src": ["'none'"],
+//         },
+//     })
+// );
 
 // app.use(function(req, res, next) {
 //     res.setHeader("Content-Security-Policy", "script-src 'self' https://apis.google.com");
