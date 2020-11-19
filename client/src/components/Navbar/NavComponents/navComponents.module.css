@@ -8,6 +8,10 @@
     margin: 10px;
 }
 
+.buttons a{
+    outline: none;
+}
+
 .signButtons {
     display: flex;
     flex: 1;
