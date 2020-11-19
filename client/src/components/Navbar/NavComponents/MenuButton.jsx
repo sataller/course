@@ -33,9 +33,13 @@ const MenuButton = (props) => {
         <div className={styles.signButtons}>
             <DropdownButton className={styles.buttons} variant="outline-secondary"
                             id="dropdown-basic-button" title="Menu">
-                {role &&<NavLink to={"/admin"}> <Dropdown.Item href="/admin">Admin</Dropdown.Item></NavLink>}
-                <NavLink to={"/main"}><Dropdown.Item>Main</Dropdown.Item></NavLink>
-                <NavLink to={`/profile/${props.authUser.id}`}><Dropdown.Item>Profile</Dropdown.Item></NavLink>
+                {role && <NavLink to={"/admin"}> <Dropdown.Item href="/admin">Admin</Dropdown.Item></NavLink>}
+                <NavLink to={"/main"}><Dropdown.Item href="/main">Main</Dropdown.Item></NavLink>
+                <NavLink to={`/profile/${props.authUser.id}`}>
+                    <Dropdown.Item href={`/profile/${props.authUser.id}`}>
+                        Profile
+                    </Dropdown.Item>
+                </NavLink>
                 <Dropdown.Item onClick={changeThem}>Chang them</Dropdown.Item>
                 <Dropdown.Divider/>
                 <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
