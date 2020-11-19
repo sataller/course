@@ -2,6 +2,7 @@ import styles from "./navComponents.module.css";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 const MenuButton = (props) => {
     let role;
@@ -24,7 +25,7 @@ const MenuButton = (props) => {
         props.updateUser({userId: props.authUser.id, them});
     };
 
-    const signOut = () =>{
+    const signOut = () => {
         props.signOut()
     };
 
@@ -32,9 +33,9 @@ const MenuButton = (props) => {
         <div className={styles.signButtons}>
             <DropdownButton className={styles.buttons} variant="outline-secondary"
                             id="dropdown-basic-button" title="Menu">
-                {role && <Dropdown.Item href="/admin">Admin</Dropdown.Item>}
-                <Dropdown.Item href="/main">Main</Dropdown.Item>
-                <Dropdown.Item href={`/profile/${props.authUser.id}`}>Profile</Dropdown.Item>
+                {role &&<NavLink to={"/admin"}> <Dropdown.Item href="/admin">Admin</Dropdown.Item></NavLink>}
+                <NavLink to={"/main"}><Dropdown.Item>Main</Dropdown.Item></NavLink>
+                <NavLink to={`/profile/${props.authUser.id}`}><Dropdown.Item>Profile</Dropdown.Item></NavLink>
                 <Dropdown.Item onClick={changeThem}>Chang them</Dropdown.Item>
                 <Dropdown.Divider/>
                 <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
