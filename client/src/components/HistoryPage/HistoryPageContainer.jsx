@@ -2,7 +2,7 @@ import React from "react"
 import HistoryPage from "./HistoryPage";
 import {connect} from "react-redux";
 import {
-    setReadableHistory,
+    setReadableHistory, setUpdatedHistory,
     setUserHistories, updateChapter,
     updateHistory,
     updateHistoryAuthor
@@ -13,6 +13,7 @@ import Preloader from "../common/Preloader/Preloader";
 class HistoryPageContainer extends React.Component {
  componentDidMount() {
      this.props.setReadableHistory(this.props.match.params.historyId);
+     this.props.setUpdatedHistory(null);
  };
 
     render() {
@@ -42,5 +43,5 @@ let WithRouterHistoryPageContainer = withRouter(HistoryPageContainer)
 export default connect(mapStateToProps, {
     updateHistory, updateHistoryAuthor,
     setUserHistories, setReadableHistory,
-    updateChapter
+    updateChapter, setUpdatedHistory
 })(WithRouterHistoryPageContainer)

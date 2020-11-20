@@ -33,7 +33,7 @@ const Chapter = (props) => {
             {props.role &&
             <div>
                 {!edit &&
-                <span onDoubleClick={activateEditMode} title={"Double click to edit"}>{
+                <span onDoubleClick={activateEditMode} title={"Double click to edit title"}>{
                     props.title}
                     </span>}
                 {edit &&

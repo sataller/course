@@ -76,6 +76,7 @@ export const updateUser = (userData) => (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
+            debugger
             if (data.resultCode === 0){
                 dispatch(getAuthUserData());
                 dispatch(refreshUser(data.user));

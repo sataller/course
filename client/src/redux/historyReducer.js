@@ -1,7 +1,9 @@
+import * as axios from "axios"
+
 const SET_HISTORIES = "network/auth/SET_HISTORIES";
 const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
 const SET_HISTORY = "network/auth/SET_HISTORY";
-// const SET_SELECT_OLL = "network/auth/SET_SELECT_OLL";
+const SET_UPDATED_HISTORY_ID = "network/auth/SET_UPDATED_HISTORY_ID";
 // const REMOVE_OLL = "network/auth/REMOVE_OLL";
 // const SELECT_USER = "network/auth/SELECT_USER";
 // const REMOVE_SELECT_USER = "network/auth/REMOVE_SELECT_USER";
@@ -11,7 +13,8 @@ let initialization = {
     history: null,
     selectedUsersId: [],
     userProfile: null,
-}
+    updatedHistoryId: null,
+};
 
 const historyReducer = (state = initialization, action) => {
     switch (action.type) {
@@ -41,11 +44,11 @@ const historyReducer = (state = initialization, action) => {
                 ...state,
                 history: action.history,
             };
-        // case SET_USER:
-        //     return {
-        //         ...state,
-        //         userProfile: action.user,
-        //     };
+        case SET_UPDATED_HISTORY_ID:
+            return {
+                ...state,
+                updatedHistoryId: action.id,
+            };
         // case REMOVE_SELECT_USER:
         //     return {
         //         ...state,
@@ -60,7 +63,7 @@ const historyReducer = (state = initialization, action) => {
 export const initializeHistories = (histories) => ({type: SET_HISTORIES, histories});
 export const refreshHistory = (history) => ({type: UPDATE_HISTORY, history});
 export const setHistory = (history) => ({type: SET_HISTORY, history});
-// export const removeSelectUser = (id) => ({type: REMOVE_SELECT_USER, id});
+export const setUpdatedHistoryId = ( id) => ({type: SET_UPDATED_HISTORY_ID, id});
 // export const setUser = (user) => ({type: SET_USER, user});
 
 export const setUserHistories = (userId) => (dispatch) => {
@@ -144,7 +147,7 @@ export const updateHistoryAuthor = (historyData) => (dispatch) => {
         }
     })
 };
-// chapterName !!!
+
 export const updateChapter = (chapterData) => (dispatch) => {
     fetch(`/api/history/${chapterData.historyId}/${chapterData.chapterId}`, {
         method: 'PATCH',
@@ -162,18 +165,29 @@ export const updateChapter = (chapterData) => (dispatch) => {
         }
     })
 };
-//
-// export const getUser = (userId) => (dispatch) => {
-//     fetch(`/api/users/${userId}`, {
-//         method: 'GET',
-//         headers: {
-//             "Content-type": "application/json",
-//             "Authorization": localStorage.getItem('Authorization')
-//         }
-//     })
-//         .then(response => response.json()).then(data => {
-//         dispatch(setUser(data.user));
-//     })
-// };
+
+export const createChapter = (historyData) => async (dispatch) => {
+    debugger
+    const formData = new FormData();
+    formData.append('image', historyData.file);
+    formData.append('title', historyData.title);
+    formData.append('id', historyData.historyId);
+
+    const response = await axios.post(`/api/history/${historyData.historyId}/chapter`, formData,  { headers: {
+            "Authorization": localStorage.getItem('Authorization')
+    }});
+debugger
+   if (response.data.resultCode === 0){
+       dispatch(setHistory(response.data.history));
+       dispatch(setUpdatedHistoryId(historyData.historyId));
+   } else {
+       alert(response.data.message);
+   }
+};
+
+export const setUpdatedHistory =(historyId) => (dispatch) => {
+    dispatch(setUpdatedHistoryId(historyId));
+
+}
 
 export default historyReducer;

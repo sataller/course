@@ -5,7 +5,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import {useState} from "react";
 import {Button} from "react-bootstrap";
 import style from "./chapter.module.css";
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const mdParser = new MarkdownIt();
 
@@ -32,7 +32,7 @@ const ChapterEditor = (props) => {
             props.updateChapter({
                 historyId: props.historyId,
                 chapterId: props.chapterId,
-                body: mdEditor.current.getMdValue(),
+                body: mdEditor.current.getHtmlValue(),
             });
         }
 

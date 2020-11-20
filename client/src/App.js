@@ -15,6 +15,7 @@ import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import HistoryPageContainer from "./components/HistoryPage/HistoryPageContainer";
 import EditorContainer from "./components/HistoryPage/Editor/EditorContainer";
+import ChapterCreatePageContainer from "./components/HistoryPage/ChapterCreatePage/ChapterCreatePageContainer";
 
 class App extends React.Component {
     componentDidMount() {
@@ -39,6 +40,8 @@ class App extends React.Component {
                     <Route path="/admin" render={() => <AdminPageContainer/>}/>
                     <Route path="/profile/:userId?" render={() => <UserPageContainer/>}/>
                     <Route path="/history/:historyId" render={() => <HistoryPageContainer/>}/>
+                    <Route path="/create/:historyId/chapter" render={() => <ChapterCreatePageContainer/>}/>
+                    {/*<Route path="/create/history" render={() => <HistoryPageContainer/>}/>*/}
                     <Route path="/editor/:historyId/:chapterId?" render={() => <EditorContainer/>}/>
                     <Route path="/auth/login" render={() => <SignInContainer/>}/>
                     <Route path="/auth/register" render={() => <SignUpContainer/>}/>

@@ -2,6 +2,7 @@ import React from "react"
 import style from "../historyPage.module.css"
 import Chapter from "./Chapter";
 import {Button} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 const TableOfContents = (props) => {
     let role = false;
@@ -17,15 +18,14 @@ const TableOfContents = (props) => {
                                                         updateChapter={props.updateChapter}
                                                         authUser={props.authUser} role={role}/>);
 
-    const addNewChapter = () => {
-        alert("hagfsdhgfagfsd")
-    };
-
     return (
         <>
             {item}
-           {role && <Button variant="outline-warning" className={style.button}
-                    onClick={addNewChapter}>+ add new chapter </Button>}
+            {role && <NavLink to={`/create/${props.history._id}/chapter`}>
+                <Button variant="outline-warning" className={style.button}>
+                    + add new chapter
+                </Button>
+            </NavLink>}
         </>
     )
 }

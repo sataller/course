@@ -142,30 +142,23 @@ module.exports.updateChapter = async function (req, res) {
 module.exports.createChapter = async function (req, res) {
     const history = await History.findById(req.params.historyId);
     let update;
-    let updateI = (i) => {
-        if (i) {
-            return i
-        }
-    }
-    if (history.chapter) {
+    if (history.chapters) {
         update = {
-            updateDate: Date.now,
-            chapters: [...history.chapter,
+            chapters: [...history.chapters,
                 {
-                    body: updateI(req.body.body),
-                    title: updateI(req.body.title),
-                    imageSrc: "",
+                    body: req.body.body? req.body.body: "",
+                    title: req.body.title? req.body.title: "",
+                    imageSrc: req.file ? req.file.location : "",
                 }
             ]
         };
     } else {
         update = {
-            updateDate: Date.now,
             chapters: [
                 {
-                    body: updateI(req.body.body),
-                    title: updateI(req.body.title),
-                    imageSrc: "",
+                    body: req.body.body? req.body.body : "",
+                    title: req.body.title? req.body.title: "",
+                    imageSrc: req.file ? req.file.location : "",
                 }
             ]
         };
@@ -179,7 +172,7 @@ module.exports.createChapter = async function (req, res) {
                 useFindAndModify: false
             }
         );
-        res.status(201).json(history);
+        res.status(201).json({history, resultCode: 0});
     } catch (e) {
         errorHandler(res, e);
     }

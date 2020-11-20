@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "../historyPage.module.css";
-import {Col, Image, Row} from "react-bootstrap";
+import {Image} from "react-bootstrap";
+import htmlParser from "react-html-parser";
 
 const chapterItem = (props) => {
     let padding = true;
     if (props.body.length > 600) {
         padding = false;
     }
+    const body = htmlParser(props.body);
     return (
-
         <div className={padding ? styles.chapter : null}>
             <span className={styles.title}>
                 <h4>***</h4>
@@ -16,7 +17,7 @@ const chapterItem = (props) => {
             </span>
             <span>
                 <Image className={styles.image} src={props.image} rounded/>
-                {props.body}
+                {body}
             </span>
 
         </div>
