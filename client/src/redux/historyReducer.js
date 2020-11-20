@@ -103,7 +103,6 @@ export const setReadableHistory = (historyId) => (dispatch) => {
         }
     }).then(response => response.json()).then(data => {
         if (data.resultCode === 0) {
-            debugger
             dispatch(setHistory(data.history))
         } else {
             alert(data.err)
@@ -147,7 +146,7 @@ export const updateHistoryAuthor = (historyData) => (dispatch) => {
 };
 // chapterName !!!
 export const updateChapter = (chapterData) => (dispatch) => {
-    fetch(`/api/history/chapter/${chapterData.historyId}`, {
+    fetch(`/api/history/${chapterData.historyId}/${chapterData.chapterId}`, {
         method: 'PATCH',
         body: JSON.stringify({...chapterData}),
         headers: {
@@ -156,9 +155,11 @@ export const updateChapter = (chapterData) => (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
-        debugger
-
-        console.log(data)
+        if (data.resultCode === 0) {
+            dispatch(setHistory(data.history))
+        } else {
+            alert(data.err)
+        }
     })
 };
 //

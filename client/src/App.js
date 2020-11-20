@@ -39,7 +39,7 @@ class App extends React.Component {
                     <Route path="/admin" render={() => <AdminPageContainer/>}/>
                     <Route path="/profile/:userId?" render={() => <UserPageContainer/>}/>
                     <Route path="/history/:historyId" render={() => <HistoryPageContainer/>}/>
-                    <Route path="/history/editor/:chapterId" render={() => <EditorContainer/>}/>
+                    <Route path="/editor/:historyId/:chapterId?" render={() => <EditorContainer/>}/>
                     <Route path="/auth/login" render={() => <SignInContainer/>}/>
                     <Route path="/auth/register" render={() => <SignUpContainer/>}/>
                     <Route path="/auth/complete" render={() => <RegisterCompletedPage/>}/>

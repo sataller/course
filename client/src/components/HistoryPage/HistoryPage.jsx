@@ -8,7 +8,7 @@ import TableOfContents from "./TableOfContents/TableOfContents";
 
 const HistoryPage = (props) => {
 
-    let items = props.history.chapters.map(i => <ChapterItem chapterName={i.chapterName}
+    let items = props.history.chapters.map(i => <ChapterItem image={i.imageSrc} title={i.title}
                                                              body={i.body}/>
     );
     return (
@@ -23,9 +23,13 @@ const HistoryPage = (props) => {
             </div>
             <div className={styles.tableOfContents}>
                 <TableOfContents history={props.history}
+                                 authUser={props.authUser}
                                  updateChapter={props.updateChapter}/>
             </div>
-            <div className={styles.item}>{items}</div>
+            <div className={styles.item}>
+                {props.history.description}
+                {items}
+            </div>
             <div className={styles.comment}><Comments/></div>
         </div>
     )

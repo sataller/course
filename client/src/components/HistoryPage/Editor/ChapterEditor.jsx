@@ -4,37 +4,54 @@ import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css';
 import {useState} from "react";
 import {Button} from "react-bootstrap";
-import style from "../historyPage.module.css";
+import style from "./chapter.module.css";
+import {NavLink, Redirect} from "react-router-dom";
 
-const mdParser = new MarkdownIt(/* Markdown-it options */);
+const mdParser = new MarkdownIt();
 
 const ChapterEditor = (props) => {
-    const mdEditor = React.useRef(null);
+    let chapter = "write you text";
 
-    const [body, setBody] = useState(props.body);
+    // if (props.readableHistory){
+    props.readableHistory.chapters.map(i => {
+        if (i._id === props.chapterId) {
+            chapter = i.body
+        }
+    });
+    // };
+    const mdEditor = React.useRef(null);
+    const [body, setBody] = useState(chapter);
 
     const handleEditorChange = ({html, text}) => {
         setBody(text)
     };
 
+
     const handleClick = () => {
         if (mdEditor.current) {
-            alert(mdEditor.current.getMdValue());
+            props.updateChapter({
+                historyId: props.historyId,
+                chapterId: props.chapterId,
+                body: mdEditor.current.getMdValue(),
+            });
         }
+
     };
 
     return (
-        <>
+        <div className={style.editor}>
+            <NavLink to={`/history/${props.historyId}`}>
+                <Button variant="outline-dark" className={style.button}
+                        onClick={handleClick}>Save</Button>
+            </NavLink>
             <MdEditor
                 ref={mdEditor}
                 value={body}
-                style={{height: "80%", textAlign: "center"}}
+                style={{minHeight: "500px", textAlign: "center",}}
                 renderHTML={(text) => mdParser.render(text)}
                 onChange={handleEditorChange}
             />
-            <Button variant="outline-dark" className={style.button}
-                    onClick={handleClick}>Save</Button>
-        </>
+        </div>
     )
 };
 

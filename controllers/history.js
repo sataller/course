@@ -71,7 +71,7 @@ module.exports.update = async function (req, res) {
         title: req.body.title ? req.body.title : history.title,
         like: updateObj.updateLike(req.user, history.like.likeNumber,
             history.like.likedUsers, req.body.like),
-        rating: updateObj.updateRate(req.user, history.rating.ratingNumber,
+        rating: updateObj.updateRate(req.params.chapterId, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
         author: req.body.author ? req.body.author : history.author,
@@ -122,7 +122,7 @@ module.exports.updateChapter = async function (req, res) {
         rating: history.rating,
         author: history.author,
         tags: history.tags,
-        chapters: updateObj.updateChapter(req.body.chapterName, history.chapters, req.body, req.file),
+        chapters: updateObj.updateChapter(req.body.chapterId, history.chapters, req.body, req.file),
     };
     try {
         const history = await History.findOneAndUpdate(

@@ -13,7 +13,7 @@ import Preloader from "../common/Preloader/Preloader";
 class HistoryPageContainer extends React.Component {
  componentDidMount() {
      this.props.setReadableHistory(this.props.match.params.historyId);
- }
+ };
 
     render() {
         if (!this.props.readableHistory){

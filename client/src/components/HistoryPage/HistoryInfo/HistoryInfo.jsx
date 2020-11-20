@@ -27,6 +27,7 @@ const HistoryInfo = (props) => {
     };
 
     const updateRating = (value) => {
+        debugger
         if (props.authUser) {
             props.updateHistory({historyId: props.history._id, rating: value});
         } else {

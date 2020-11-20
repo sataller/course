@@ -49,8 +49,8 @@ module.exports.updateRate = (userId, ratingNumber, ratingAddUsers, newRate) => {
     }
 };
 
-module.exports.updateChapter = (chapterName, chapters, body, file) => {
-    let chapterIndex = chapters.map(i => i.title).indexOf(chapterName);
+module.exports.updateChapter = (chapterId, chapters, body, file) => {
+    let chapterIndex = chapters.map(i => i._id).indexOf(chapterId);
     const updateI = (i, j) => {
         return i ? i : j
     };
