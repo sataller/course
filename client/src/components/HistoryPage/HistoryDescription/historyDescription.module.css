@@ -1,0 +1,10 @@
+.icon a{
+    color: orange;
+}
+
+.icon{
+    color: grey;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: top;
+}

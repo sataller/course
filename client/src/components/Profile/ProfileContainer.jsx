@@ -19,10 +19,12 @@ class ProfileContainer extends React.Component {
             return <Preloader/>
         }
         return (
-            <Profile userProfile={this.props.userProfile} histories={this.props.histories}
-                     updateUser={this.props.updateUser} authUser={this.props.authUser}
-                     updateHistoryAuthor={this.props.updateHistoryAuthor}
-                     updateHistory={this.props.updateHistory}/>
+            <div>
+                <Profile userProfile={this.props.userProfile} histories={this.props.histories}
+                         updateUser={this.props.updateUser} authUser={this.props.authUser}
+                         updateHistoryAuthor={this.props.updateHistoryAuthor}
+                         updateHistory={this.props.updateHistory}/>
+            </div>
         )
 
     }

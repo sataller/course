@@ -9,7 +9,7 @@ passportAuth = passport.authenticate('jwt', {"session": false});
 router.get('/', controller.getHistories);
 router.get('/:userId', controller.getUserHistories);
 router.get('/read/:historyId', passportAuth, controller.getHistory);
-router.post('/', passportAuth, controller.create);
+router.post('/create', passportAuth, controller.create);
 router.patch('/:historyId', passportAuth, controller.update);
 router.patch('/', passportAuth, controller.updateAuthor);
 router.patch('/:historyId/:chapterId', passportAuth,

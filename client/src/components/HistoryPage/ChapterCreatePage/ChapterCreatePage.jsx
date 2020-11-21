@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import style from "./chapterCreatePage.module.css";
-import Upload from "../../common/upload/uploadImage";
+import Upload from "../../common/Upload/UploadImage";
 import {Button, Form} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import {NavLink, Redirect} from "react-router-dom";

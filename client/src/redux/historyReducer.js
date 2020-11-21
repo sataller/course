@@ -4,9 +4,9 @@ const SET_HISTORIES = "network/auth/SET_HISTORIES";
 const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
 const SET_HISTORY = "network/auth/SET_HISTORY";
 const SET_UPDATED_HISTORY_ID = "network/auth/SET_UPDATED_HISTORY_ID";
-// const REMOVE_OLL = "network/auth/REMOVE_OLL";
-// const SELECT_USER = "network/auth/SELECT_USER";
-// const REMOVE_SELECT_USER = "network/auth/REMOVE_SELECT_USER";
+const ADD_NEW_HISTORY = "network/auth/ADD_NEW_HISTORY";
+const DELETE_HISTORY = "network/auth/DELETE_HISTORY";
+const SET_DELETE_HISTORY_ID = "network/auth/SET_DELETE_HISTORY_ID";
 
 let initialization = {
     histories: [],
@@ -14,6 +14,7 @@ let initialization = {
     selectedUsersId: [],
     userProfile: null,
     updatedHistoryId: null,
+    deletedHistoryId: null,
 };
 
 const historyReducer = (state = initialization, action) => {
@@ -48,12 +49,22 @@ const historyReducer = (state = initialization, action) => {
             return {
                 ...state,
                 updatedHistoryId: action.id,
+            };case SET_DELETE_HISTORY_ID:
+            return {
+                ...state,
+                deletedHistoryId: action.id,
             };
-        // case REMOVE_SELECT_USER:
-        //     return {
-        //         ...state,
-        //         selectedUsersId: state.selectedUsersId.filter(i => i !== action.id),
-        //     };
+        case ADD_NEW_HISTORY:
+            return {
+                ...state,
+                histories: [...state.histories, action.history],
+            };
+        case DELETE_HISTORY:
+            debugger
+            return {
+                ...state,
+                histories: state.histories.filter(i => i._id !== action.historyId),
+            };
         default:
             return state
     }
@@ -63,8 +74,10 @@ const historyReducer = (state = initialization, action) => {
 export const initializeHistories = (histories) => ({type: SET_HISTORIES, histories});
 export const refreshHistory = (history) => ({type: UPDATE_HISTORY, history});
 export const setHistory = (history) => ({type: SET_HISTORY, history});
-export const setUpdatedHistoryId = ( id) => ({type: SET_UPDATED_HISTORY_ID, id});
-// export const setUser = (user) => ({type: SET_USER, user});
+export const setUpdatedHistoryId = (id) => ({type: SET_UPDATED_HISTORY_ID, id});
+export const setDeletedHistoryId = (id) => ({type: SET_DELETE_HISTORY_ID, id});
+export const addNewHistory = (history) => ({type: ADD_NEW_HISTORY, history});
+export const removeHistory = (historyId) => ({type: DELETE_HISTORY, historyId});
 
 export const setUserHistories = (userId) => (dispatch) => {
     fetch(`/api/history/${userId}`, {
@@ -131,6 +144,7 @@ export const updateHistory = (historyData) => (dispatch) => {
         }
     })
 };
+
 export const updateHistoryAuthor = (historyData) => (dispatch) => {
     fetch(`/api/history/`, {
         method: 'PATCH',
@@ -166,27 +180,62 @@ export const updateChapter = (chapterData) => (dispatch) => {
     })
 };
 
+export const createHistory = (historyData) => async (dispatch) => {
+    fetch(`/api/history/create`, {
+        method: 'POST',
+        body: JSON.stringify({...historyData}),
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    })
+        .then(response => response.json()).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(addNewHistory(data.history));
+            dispatch(setUpdatedHistory(data.history._id));
+        } else {
+            alert(data.message)
+        }
+    });
+};
+
+export const deleteHistory = (historyData) => async (dispatch) => {
+    const response = await axios.delete(`/api/history/${historyData.historyId}`, {
+        headers: {
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    });
+    if (response.data.resultCode === 0) {
+        dispatch(removeHistory(historyData.historyId));
+        dispatch(setUpdatedHistory(historyData.historyId));
+        dispatch(setDeletedHistory(historyData.historyId));
+    } else {
+        alert(response.data.message);
+    }
+};
+
 export const createChapter = (historyData) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', historyData.file);
     formData.append('title', historyData.title);
     formData.append('id', historyData.historyId);
 
-    const response = await axios.post(`/api/history/${historyData.historyId}/chapter`, formData,  { headers: {
+    const response = await axios.post(`/api/history/${historyData.historyId}/chapter`, formData, {
+        headers: {
             "Authorization": localStorage.getItem('Authorization')
-    }});
-   if (response.data.resultCode === 0){
-       dispatch(setHistory(response.data.history));
-       dispatch(setUpdatedHistoryId(historyData.historyId));
-   } else {
-       alert(response.data.message);
-   }
+        }
+    });
+    if (response.data.resultCode === 0) {
+        dispatch(setHistory(response.data.history));
+        dispatch(setUpdatedHistoryId(historyData.historyId));
+    } else {
+        alert(response.data.message);
+    }
 };
 
 export const deleteChapter = (chapterData) => (dispatch) => {
     fetch(`/api/history/${chapterData.historyId}/${chapterData.chapterId}`, {
         method: 'DELETE',
-        // body: JSON.stringify({...chapterData}),
         headers: {
             "Content-type": "application/json",
             "Authorization": localStorage.getItem('Authorization')
@@ -201,9 +250,11 @@ export const deleteChapter = (chapterData) => (dispatch) => {
     })
 };
 
-export const setUpdatedHistory =(historyId) => (dispatch) => {
+export const setUpdatedHistory = (historyId) => (dispatch) => {
     dispatch(setUpdatedHistoryId(historyId));
-
+};
+export const setDeletedHistory = (historyId) => (dispatch) => {
+    dispatch(setDeletedHistoryId(historyId));
 };
 
 export default historyReducer;

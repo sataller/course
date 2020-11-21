@@ -11,14 +11,16 @@ const mdParser = new MarkdownIt();
 
 const ChapterEditor = (props) => {
     let chapter = "write you text";
+    if(!props.chapterId) {
+        chapter = props.readableHistory.description
+    } else{
+        props.readableHistory.chapters.map(i => {
+            if (i._id === props.chapterId) {
+                chapter = i.body
+            }
+        });
+    }
 
-    // if (props.readableHistory){
-    props.readableHistory.chapters.map(i => {
-        if (i._id === props.chapterId) {
-            chapter = i.body
-        }
-    });
-    // };
     const mdEditor = React.useRef(null);
     const [body, setBody] = useState(chapter);
 
@@ -29,13 +31,19 @@ const ChapterEditor = (props) => {
 
     const handleClick = () => {
         if (mdEditor.current) {
-            props.updateChapter({
-                historyId: props.historyId,
-                chapterId: props.chapterId,
-                body: mdEditor.current.getHtmlValue(),
-            });
+           if(!props.chapterId){
+               props.updateHistory({
+                   historyId: props.historyId,
+                    description: mdEditor.current.getHtmlValue(),
+               })
+           } else {
+               props.updateChapter({
+                   historyId: props.historyId,
+                   chapterId: props.chapterId,
+                   body: mdEditor.current.getHtmlValue(),
+               });
+           }
         }
-
     };
 
     return (

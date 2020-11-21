@@ -1,4 +1,4 @@
-.item{
+.item {
     border-radius: 10px;
     background-color: rgba(169, 169, 169, 0.4);
     color: orange;
@@ -6,32 +6,25 @@
     margin-bottom: 10px;
 }
 
-.menu{
+.menu {
     float: right;
     padding: 10px;
 }
 
-a{
+a {
     color: #999999;
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     color: #999999;
     /*text-decoration: none;*/
 }
 
-.lick{
+.lick {
     cursor: pointer;
 }
 
-.editButton{
-    float:right;
-}
-
-.info{
-
-}
-
-.description{
-
+.editButton {
+    float: right;
 }

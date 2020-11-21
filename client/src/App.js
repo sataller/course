@@ -16,6 +16,7 @@ import Preloader from "./components/common/Preloader/Preloader";
 import HistoryPageContainer from "./components/HistoryPage/HistoryPageContainer";
 import EditorContainer from "./components/HistoryPage/Editor/EditorContainer";
 import ChapterCreatePageContainer from "./components/HistoryPage/ChapterCreatePage/ChapterCreatePageContainer";
+import HistoryCreatePageContainer from "./components/HistoryPage/HistoryCreatePage/HistoryCreatePageContainer";
 
 class App extends React.Component {
 
@@ -30,7 +31,6 @@ class App extends React.Component {
 
         let date = new Date();
         let timestamp = (+ date.getTime().toString()) - (+ localStorage.getItem('time'));
-        debugger
         if (timestamp> 18000000){
             localStorage.removeItem('Authorization');
             localStorage.removeItem('time');
@@ -50,8 +50,9 @@ class App extends React.Component {
                     <Route path="/profile/:userId?" render={() => <UserPageContainer/>}/>
                     <Route path="/history/:historyId" render={() => <HistoryPageContainer/>}/>
                     <Route path="/create/:historyId/chapter" render={() => <ChapterCreatePageContainer/>}/>
-                    {/*<Route path="/create/history" render={() => <HistoryPageContainer/>}/>*/}
+                    <Route path="/create/history" render={() => <HistoryCreatePageContainer/>}/>
                     <Route path="/editor/:historyId/:chapterId?" render={() => <EditorContainer/>}/>
+                    <Route path="/editor/:historyId" render={() => <EditorContainer/>}/>
                     <Route path="/auth/login" render={() => <SignInContainer/>}/>
                     <Route path="/auth/register" render={() => <SignUpContainer/>}/>
                     <Route path="/auth/complete" render={() => <RegisterCompletedPage/>}/>

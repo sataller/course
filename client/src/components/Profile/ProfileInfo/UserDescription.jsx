@@ -1,4 +1,4 @@
-import styles from "../Profile.module.css";
+import styles from "../profile.module.css";
 import CreateIcon from "@material-ui/icons/Create";
 import React, {useEffect, useState} from "react";
 

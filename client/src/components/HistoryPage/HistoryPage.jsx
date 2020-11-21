@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./historyPage.module.css"
-import ChapterItem from "./chapterItem/ChapterItem";
+import ChapterItem from "./ChapterItem/ChapterItem";
 import NavBarContainer from "../Navbar/NavbarContainet";
 import Comments from "./Comments/Comments";
 import HistoryInfo from "./HistoryInfo/HistoryInfo";
@@ -8,7 +8,7 @@ import TableOfContents from "./TableOfContents/TableOfContents";
 
 const HistoryPage = (props) => {
 
-    let items = props.history.chapters.map(i => <ChapterItem image={i.imageSrc} title={i.title}
+    let items = props.history.chapters.map(i => <ChapterItem key={i._id} image={i.imageSrc} title={i.title}
                                                              body={i.body}/>
     );
     return (
@@ -19,6 +19,7 @@ const HistoryPage = (props) => {
             <div className={styles.itemInfo}>
                 <HistoryInfo authUser={props.authUser}
                              updateHistory={props.updateHistory}
+                             deleteHistory={props.deleteHistory}
                              history={props.history}/>
             </div>
             <div className={styles.tableOfContents}>
@@ -31,7 +32,9 @@ const HistoryPage = (props) => {
                 {props.history.description}
                 {items}
             </div>
-            <div className={styles.comment}><Comments/></div>
+            <div className={styles.comment}>
+                <Comments/>
+            </div>
         </div>
     )
 }

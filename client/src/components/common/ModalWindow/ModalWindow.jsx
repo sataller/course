@@ -48,7 +48,7 @@ export default function ModalWindow(props) {
         <div style={modalStyle} className={classes.paper}>
             <h2 id="simple-modal-title">Are you sour?</h2>
             <Button className={style.modalButton} onClick={() => {
-                props.deleteChapter();
+                props.delete();
                 handleClose();
             }} variant="secondary" size="sm">
                 Yes
@@ -64,7 +64,7 @@ export default function ModalWindow(props) {
     return (
         <div className={style.modal}>
             <span className={style.icon}>
-                    <DeleteIcon titleAccess={"Click to delete chapter"}
+                    <DeleteIcon titleAccess={"Click to delete"}
                                 fontSize="small"
                                 type="button" onClick={handleOpen}/>
                 </span>

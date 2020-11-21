@@ -21,7 +21,7 @@ class ChapterCreatePageContainer extends React.Component {
 const mapDispatchToProps = (state) => ({
     updatedHistoryId: state.historyPage.updatedHistoryId,
 });
-let WithRouterHistoryPageContainer = withRouter(ChapterCreatePageContainer)
+let WithRouterHistoryPageContainer = withRouter(ChapterCreatePageContainer);
 
 export default connect(mapDispatchToProps, {
     createChapter

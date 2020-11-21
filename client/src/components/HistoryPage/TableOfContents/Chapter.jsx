@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import style from "../historyPage.module.css";
 import CreateIcon from "@material-ui/icons/Create";
 import {NavLink} from "react-router-dom";
-import ModalWindow from "../../common/modalWindow/modalWindow";
+import ModalWindow from "../../common/ModalWindow/ModalWindow";
 
 const Chapter = (props) => {
     const [edit, setEdit] = useState(false);
@@ -54,7 +54,7 @@ const Chapter = (props) => {
                         </span>
                 </NavLink>
 
-                <ModalWindow  deleteChapter={deleteChapter}/>
+                <ModalWindow  delete={deleteChapter}/>
             </div>}
 
         </div>

@@ -6,6 +6,8 @@ import {Dropdown} from "react-bootstrap";
 import SimpleRating from "../../common/Rating/SimpleRating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Title from "../../MainPage/HistoryItems/HistoryComponents/Title";
+import ModalWindow from "../../common/ModalWindow/ModalWindow";
+import HistoryDescription from "../HistoryDescription/HistoryDescription";
 
 const HistoryInfo = (props) => {
 
@@ -29,7 +31,9 @@ const HistoryInfo = (props) => {
     const updateRating = (value) => {
         debugger
         if (props.authUser) {
-            props.updateHistory({historyId: props.history._id, rating: value});
+            props.updateHistory({
+                historyId: props.history._id,
+                rating: value});
         } else {
             alert("You are not logged in")
         }
@@ -41,6 +45,9 @@ const HistoryInfo = (props) => {
             alert("You are not logged in")
         }
     };
+    const deleteHistory = () => {
+        props.deleteHistory({historyId: props.history._id});
+    };
 
     let edit = false;
     if (props.authUser) {
@@ -51,6 +58,7 @@ const HistoryInfo = (props) => {
             edit = false
         }
     }
+
     const tags = props.history.tags.map(i => i.tagName);
 
     return (
@@ -62,8 +70,9 @@ const HistoryInfo = (props) => {
                                        updateTitle={updateTitle}/>}
                         {!edit && props.history.title}
                         <span className={styles.lick}>
-                        <StarBorderIcon/> {props.history.rating.ratingNumber}
-                    </span>
+                            <StarBorderIcon/> {props.history.rating.ratingNumber}
+                        </span>
+                        {edit && <ModalWindow delete={deleteHistory}/>}
                     </h3>
                     <span className={styles.lick}>
                        <SimpleRating updateRating={updateRating}
@@ -85,7 +94,7 @@ const HistoryInfo = (props) => {
                 </div>
                 <Dropdown.Divider/>
                 <div className={styles.description}>
-                    {props.history.description}
+                    <HistoryDescription historyId={props.history._id} description={props.history.description}/>
                 </div>
             </div>
         </div>

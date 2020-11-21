@@ -1,6 +1,6 @@
 import React from "react"
 import {Button} from "react-bootstrap"
-import styles from "./Navbar.module.css"
+import styles from "./navbar.module.css"
 import SearchBlock from "./NavComponents/SearchBlock";
 import MenuButton from "./NavComponents/MenuButton";
 import {NavLink} from "react-router-dom";

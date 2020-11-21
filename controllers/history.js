@@ -50,13 +50,19 @@ module.exports.create = async function (req, res) {
             description: req.body.description ? req.body.description : "here will be a description",
             title: req.body.title ? req.body.title : "here will be the title",
             author: {
-                user: req.userId,
-                userName: req.userName,
+                user: req.user._id,
+                userName: req.body.userName,
+            },
+            like: {
+                likeNumber: 0,
+                likedUsers: [],
             },
             rating: {
-                user: req.user,
-                ratingNumber: 5,
+                ratingAddUsers: [],
+                ratingNumber: 0,
             },
+            chapters: [],
+            comments: [],
         }).save();
         res.status(201).json({history, resultCode: 0})
     } catch (e) {
@@ -71,7 +77,7 @@ module.exports.update = async function (req, res) {
         title: req.body.title ? req.body.title : history.title,
         like: updateObj.updateLike(req.user, history.like.likeNumber,
             history.like.likedUsers, req.body.like),
-        rating: updateObj.updateRate(req.params.chapterId, history.rating.ratingNumber,
+        rating: updateObj.updateRate(req.user, history.rating.ratingNumber,
             history.rating.ratingAddUsers, req.body.rating),
         tags: req.body.tags ? req.body.tags : history.tags,
         author: req.body.author ? req.body.author : history.author,
@@ -226,6 +232,7 @@ module.exports.remove = async function (req, res) {
         errorHandler(res, e);
     }
 };
+
 module.exports.removeChapter = async function (req, res) {
     try {
         let history = await History.findById(req.params.historyId);

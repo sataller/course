@@ -1,13 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 import style from './upload.module.css'
 
 function Upload(props) {
-    // const {acceptedFiles, getRootProps, getInputProps} = useDropzone({onDrop});
-
-    // const onDrop = useCallback(acceptedFiles => {
-    //     console.log(acceptedFiles);
-    // });
     const [files, setFiles] = useState([]);
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/jpeg, image/png, image/jpg',

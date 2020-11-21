@@ -2,7 +2,7 @@
     /*display: inline-grid;*/
     display: grid;
     color: orange;
-    grid-template-rows: 0.1fr 0.1fr 0.1fr 1fr 0.1fr;
+    grid-template-rows: 100px 0.1fr 0.1fr 1fr 0.1fr;
     grid-template-columns: 100%;
     grid-template-areas: "nav" "itemInfo" "tableOfContents" "item" "comment";
 }
@@ -44,7 +44,7 @@ text-align: center;
 }
 
 .image{
-    width: 250px;
+    max-width: 250px;
     float: left;
     margin: 2% 2% 2% 2%;
 }
@@ -80,7 +80,7 @@ text-align: center;
     margin-top: 5px;
 }
 .modal{
-    display: inline;
+    display: inline-block;
 }
 .modalButton{
     margin-left: 25%;

@@ -28,9 +28,10 @@ module.exports.updateRate = (userId, ratingNumber, ratingAddUsers, newRate) => {
     if (newRate) {
         let user = {user: userId, rating: newRate};
         let userIndex = ratingAddUsers.map(i => i.user).indexOf(userId._id);
-        if (userIndex === -1) {
+        if (ratingAddUsers.length === 0){
+            ratingAddUsers = [user];
+        }else if (userIndex === -1) {
             ratingAddUsers = [...ratingAddUsers, user];
-            ratingAddUsers[userIndex].rating = newRate;
         } else {
             ratingAddUsers[userIndex].rating = newRate;
         }
