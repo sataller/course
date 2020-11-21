@@ -24,6 +24,7 @@ const HistoryPage = (props) => {
             <div className={styles.tableOfContents}>
                 <TableOfContents history={props.history}
                                  authUser={props.authUser}
+                                 deleteChapter={props.deleteChapter}
                                  updateChapter={props.updateChapter}/>
             </div>
             <div className={styles.item}>

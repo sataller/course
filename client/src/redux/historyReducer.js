@@ -167,7 +167,6 @@ export const updateChapter = (chapterData) => (dispatch) => {
 };
 
 export const createChapter = (historyData) => async (dispatch) => {
-    debugger
     const formData = new FormData();
     formData.append('image', historyData.file);
     formData.append('title', historyData.title);
@@ -176,7 +175,6 @@ export const createChapter = (historyData) => async (dispatch) => {
     const response = await axios.post(`/api/history/${historyData.historyId}/chapter`, formData,  { headers: {
             "Authorization": localStorage.getItem('Authorization')
     }});
-debugger
    if (response.data.resultCode === 0){
        dispatch(setHistory(response.data.history));
        dispatch(setUpdatedHistoryId(historyData.historyId));
@@ -185,9 +183,27 @@ debugger
    }
 };
 
+export const deleteChapter = (chapterData) => (dispatch) => {
+    fetch(`/api/history/${chapterData.historyId}/${chapterData.chapterId}`, {
+        method: 'DELETE',
+        // body: JSON.stringify({...chapterData}),
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": localStorage.getItem('Authorization')
+        }
+    })
+        .then(response => response.json()).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setHistory(data.history))
+        } else {
+            alert(data.err)
+        }
+    })
+};
+
 export const setUpdatedHistory =(historyId) => (dispatch) => {
     dispatch(setUpdatedHistoryId(historyId));
 
-}
+};
 
 export default historyReducer;

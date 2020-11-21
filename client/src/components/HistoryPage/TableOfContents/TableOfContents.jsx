@@ -16,6 +16,7 @@ const TableOfContents = (props) => {
                                                         authorId={props.history.author.user}
                                                         id={i._id} key={i._id} body={i.body}
                                                         updateChapter={props.updateChapter}
+                                                        deleteChapter={props.deleteChapter}
                                                         authUser={props.authUser} role={role}/>);
 
     return (

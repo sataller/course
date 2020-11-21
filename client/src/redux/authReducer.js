@@ -32,6 +32,7 @@ export const logOut = () => ({type: LOGOUT});
 
 export const signOut = () => (dispatch) => {
     localStorage.removeItem('Authorization');
+    localStorage.removeItem('times');
     dispatch(logOut());
 };
 
@@ -44,8 +45,13 @@ export const signIn = (email, password) => async (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
+        debugger
+
         if (data.resultCode === 0) {
+            let date = new Date();
+            let timestamp = date.getTime().toString();
             localStorage.setItem('Authorization', data.token);
+            localStorage.setItem('time', timestamp);
             localStorage.setItem('them', data.user.them);
             dispatch(login(data.user));
         } else {

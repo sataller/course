@@ -18,5 +18,6 @@ router.post('/:historyId/chapter', passportAuth,
     upload.upload, controller.createChapter);
 router.post('/:historyId/comments', passportAuth, controller.createComment);
 router.delete('/:historyId', passportAuth, controller.remove);
+router.delete('/:historyId/:chapterId', passportAuth, controller.removeChapter);
 
 module.exports = router;

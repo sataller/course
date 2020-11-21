@@ -18,6 +18,7 @@ import EditorContainer from "./components/HistoryPage/Editor/EditorContainer";
 import ChapterCreatePageContainer from "./components/HistoryPage/ChapterCreatePage/ChapterCreatePageContainer";
 
 class App extends React.Component {
+
     componentDidMount() {
         this.props.initializeApp();
     };
@@ -25,6 +26,14 @@ class App extends React.Component {
     render() {
         if (!this.props.initialized) {
             return <Preloader/>
+        }
+
+        let date = new Date();
+        let timestamp = (+ date.getTime().toString()) - (+ localStorage.getItem('time'));
+        debugger
+        if (timestamp> 18000000){
+            localStorage.removeItem('Authorization');
+            localStorage.removeItem('time');
         }
 
         let background = localStorage.getItem('them') || "day";

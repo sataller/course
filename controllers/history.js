@@ -146,8 +146,8 @@ module.exports.createChapter = async function (req, res) {
         update = {
             chapters: [...history.chapters,
                 {
-                    body: req.body.body? req.body.body: "",
-                    title: req.body.title? req.body.title: "",
+                    body: req.body.body ? req.body.body : "",
+                    title: req.body.title ? req.body.title : "",
                     imageSrc: req.file ? req.file.location : "",
                 }
             ]
@@ -156,8 +156,8 @@ module.exports.createChapter = async function (req, res) {
         update = {
             chapters: [
                 {
-                    body: req.body.body? req.body.body : "",
-                    title: req.body.title? req.body.title: "",
+                    body: req.body.body ? req.body.body : "",
+                    title: req.body.title ? req.body.title : "",
                     imageSrc: req.file ? req.file.location : "",
                 }
             ]
@@ -220,6 +220,36 @@ module.exports.remove = async function (req, res) {
         await History.remove({_id: req.params.historyId});
         res.status(200).json({
             message: "History deleted",
+            resultCode: 0,
+        });
+    } catch (e) {
+        errorHandler(res, e);
+    }
+};
+module.exports.removeChapter = async function (req, res) {
+    try {
+        let history = await History.findById(req.params.historyId);
+        let chapters = [];
+        history.chapters.map(i => {
+            let j = i._id.toString();
+            if (j !== req.params.chapterId) {
+                chapters.push(i)
+            }
+        });
+        let update = {
+            chapters: chapters,
+        };
+        history = await History.findOneAndUpdate(
+            {_id: req.params.historyId},
+            {$set: update},
+            {
+                new: true,
+                useFindAndModify: false
+            }
+        );
+        res.status(200).json({
+            history,
+            message: "Chapter deleted",
             resultCode: 0,
         });
     } catch (e) {

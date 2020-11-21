@@ -2,6 +2,7 @@ import React from "react"
 import HistoryPage from "./HistoryPage";
 import {connect} from "react-redux";
 import {
+    deleteChapter,
     setReadableHistory, setUpdatedHistory,
     setUserHistories, updateChapter,
     updateHistory,
@@ -25,6 +26,7 @@ class HistoryPageContainer extends React.Component {
                 <HistoryPage authUser={this.props.authUser}
                              updateHistory={this.props.updateHistory}
                              updateChapter={this.props.updateChapter}
+                             deleteChapter={this.props.deleteChapter}
                              history={this.props.readableHistory}/>
             </div>
         )
@@ -43,5 +45,6 @@ let WithRouterHistoryPageContainer = withRouter(HistoryPageContainer)
 export default connect(mapStateToProps, {
     updateHistory, updateHistoryAuthor,
     setUserHistories, setReadableHistory,
-    updateChapter, setUpdatedHistory
+    updateChapter, setUpdatedHistory,
+    deleteChapter
 })(WithRouterHistoryPageContainer)
