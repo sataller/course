@@ -36,6 +36,7 @@ module.exports.updateRate = (userId, ratingNumber, ratingAddUsers, newRate) => {
             ratingAddUsers[userIndex].rating = newRate;
         }
         ratingNumber = ratingAddUsers.reduce((sum, item) => sum + item.rating, 0) / ratingAddUsers.length;
+        ratingNumber = ratingNumber.toFixed(1);
         return ({
                 ratingNumber,
                 ratingAddUsers,

@@ -1,4 +1,5 @@
 import * as axios from "axios"
+import socket from "../components/common/socket.io/socket";
 
 const SET_HISTORIES = "network/auth/SET_HISTORIES";
 const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
@@ -7,10 +8,12 @@ const SET_UPDATED_HISTORY_ID = "network/auth/SET_UPDATED_HISTORY_ID";
 const ADD_NEW_HISTORY = "network/auth/ADD_NEW_HISTORY";
 const DELETE_HISTORY = "network/auth/DELETE_HISTORY";
 const SET_DELETE_HISTORY_ID = "network/auth/SET_DELETE_HISTORY_ID";
+const UPDATE_COMMENTS = "network/auth/UPDATE_COMMENTS";
 
 let initialization = {
     histories: [],
     history: null,
+    comments: null,
     selectedUsersId: [],
     userProfile: null,
     updatedHistoryId: null,
@@ -44,12 +47,14 @@ const historyReducer = (state = initialization, action) => {
             return {
                 ...state,
                 history: action.history,
+                comments: action.history.comments,
             };
         case SET_UPDATED_HISTORY_ID:
             return {
                 ...state,
                 updatedHistoryId: action.id,
-            };case SET_DELETE_HISTORY_ID:
+            };
+        case SET_DELETE_HISTORY_ID:
             return {
                 ...state,
                 deletedHistoryId: action.id,
@@ -60,10 +65,14 @@ const historyReducer = (state = initialization, action) => {
                 histories: [...state.histories, action.history],
             };
         case DELETE_HISTORY:
-            debugger
             return {
                 ...state,
                 histories: state.histories.filter(i => i._id !== action.historyId),
+            };
+        case UPDATE_COMMENTS:
+            return {
+                ...state,
+                comments: [...state.comments, action.comment],
             };
         default:
             return state
@@ -78,6 +87,7 @@ export const setUpdatedHistoryId = (id) => ({type: SET_UPDATED_HISTORY_ID, id});
 export const setDeletedHistoryId = (id) => ({type: SET_DELETE_HISTORY_ID, id});
 export const addNewHistory = (history) => ({type: ADD_NEW_HISTORY, history});
 export const removeHistory = (historyId) => ({type: DELETE_HISTORY, historyId});
+export const updateComments = (comment) => ({type: UPDATE_COMMENTS, comment});
 
 export const setUserHistories = (userId) => (dispatch) => {
     fetch(`/api/history/${userId}`, {
@@ -250,11 +260,31 @@ export const deleteChapter = (chapterData) => (dispatch) => {
     })
 };
 
+export const sendNewComment = (commentData) => (dispatch) => {
+    socket.emit("COMMENT:ADD", commentData);
+    let comment = {
+        body: commentData.body,
+        userId: commentData.userId,
+        userName: commentData.userName,
+    } ;
+    dispatch(updateComments(comment));
+
+};
+
+export const addNewComment = (historyData) => (dispatch) => {
+    if (historyData.resultCode === 0){
+        dispatch(setHistory(historyData.updatedHistory));
+    } else {
+        alert("some error");
+    }
+};
+
 export const setUpdatedHistory = (historyId) => (dispatch) => {
     dispatch(setUpdatedHistoryId(historyId));
 };
 export const setDeletedHistory = (historyId) => (dispatch) => {
     dispatch(setDeletedHistoryId(historyId));
 };
+
 
 export default historyReducer;

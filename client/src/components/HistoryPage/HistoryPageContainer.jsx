@@ -39,6 +39,7 @@ class HistoryPageContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
+    isAuth: state.authPage.isAuth,
     authUser: state.authPage.authUser,
     userProfile: state.userPage.userProfile,
     readableHistory: state.historyPage.history,

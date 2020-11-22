@@ -2,10 +2,10 @@ import React from "react"
 import styles from "./historyPage.module.css"
 import ChapterItem from "./ChapterItem/ChapterItem";
 import NavBarContainer from "../Navbar/NavbarContainet";
-import Comments from "./Comments/Comments";
 import HistoryInfo from "./HistoryInfo/HistoryInfo";
 import TableOfContents from "./TableOfContents/TableOfContents";
 import htmlParser from "react-html-parser";
+import CommentsContainer from "./Comments/CommentsContainer";
 
 const HistoryPage = (props) => {
 
@@ -37,7 +37,7 @@ const HistoryPage = (props) => {
                 {items}
             </div>
             <div className={styles.comment}>
-                <Comments/>
+                <CommentsContainer/>
             </div>
         </div>
     )

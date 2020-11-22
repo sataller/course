@@ -4,8 +4,7 @@ import {NavLink} from "react-router-dom";
 import styles from "./profile.module.css"
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ModalWindow from "../common/ModalWindow/ModalWindow";
-import {deleteHistory} from "../../redux/historyReducer";
+import htmlParser from "react-html-parser";
 
 
 const Item = (props) => {
@@ -18,6 +17,8 @@ const Item = (props) => {
     };
 
     const tags = props.tags.map(i => i.tagName);
+    const description = htmlParser(props.description);
+
     return (
         <div className={styles.item}>
                 <span>
@@ -38,7 +39,7 @@ const Item = (props) => {
             </div>
             <Dropdown.Divider/>
             <div className={styles.description}>
-                {props.description}
+                {description}
             </div>
         </div>
     )

@@ -5,6 +5,9 @@ import styles from "./createHistoryPage.module.css";
 
 const HistoryCreatePage = (props) => {
     const {register, handleSubmit, errors} = useForm();
+    if (errors){
+        console.log(errors)
+    }
     const onSubmit = (value) => {
         props.createHistory({
             title: value.title,
@@ -27,7 +30,7 @@ const HistoryCreatePage = (props) => {
                     <Form.Control as="textarea" rows={3} placeholder="Enter description"
                                   name="description" ref={register({required: true, mnLength: 1})}/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button  variant="outline-primary" type="submit">
                     Create
                 </Button>
             </form>

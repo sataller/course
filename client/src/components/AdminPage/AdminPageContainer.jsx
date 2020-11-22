@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import ToolBarContainer from "../ToolBar/ToolBarContainer";
 import {getAuthUserData, signOut} from "../../redux/authReducer";
 import {setUsers, deleteUser, updateUser} from "../../redux/userReducer";
+import {Redirect} from "react-router-dom";
 
 class AdminPageContainer extends React.Component {
 componentDidMount() {
@@ -13,6 +14,9 @@ componentDidMount() {
 };
 
     render() {
+        if (!this.props.isAuth){
+            return <Redirect to={"/auth/login"}/>
+        }
         return (
             <div className={styles.table}>
                 <ToolBarContainer/>

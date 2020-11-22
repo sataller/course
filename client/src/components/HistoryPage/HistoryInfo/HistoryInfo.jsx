@@ -95,7 +95,7 @@ const HistoryInfo = (props) => {
                 </div>
                 <Dropdown.Divider/>
                 <div className={styles.description}>
-                    <HistoryDescription historyId={props.history._id} description={props.history.description}/>
+                    <HistoryDescription edit={edit} historyId={props.history._id} description={props.history.description}/>
                 </div>
             </div>
         </div>

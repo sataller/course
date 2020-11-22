@@ -3,19 +3,22 @@ import style from "./chapterCreatePage.module.css";
 import Upload from "../../common/Upload/UploadImage";
 import {Button, Form} from "react-bootstrap";
 import {useForm} from "react-hook-form";
-import {NavLink, Redirect} from "react-router-dom";
 
 const ChapterCreatePage = (props) => {
     const [file, setFilesToDownload] = useState([]);
 
 
     const {register, handleSubmit, errors} = useForm();
+    if (errors){
+        console.log(errors)
+    }
     const onSubmit = (value) => {
         props.createChapter({
             title: value.title,
             file: file[0],
             historyId: props.historyId
         });
+
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={style.container}>

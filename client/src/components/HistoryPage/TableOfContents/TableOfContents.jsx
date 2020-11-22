@@ -17,7 +17,8 @@ const TableOfContents = (props) => {
                                                         id={i._id} key={i._id} body={i.body}
                                                         updateChapter={props.updateChapter}
                                                         deleteChapter={props.deleteChapter}
-                                                        authUser={props.authUser} role={role}/>);
+                                                        authUser={props.authUser} role={role}
+                                                        itemNumber={(props.history.chapters.indexOf(i)) + 1}/>);
 
     return (
         <>

@@ -7,6 +7,9 @@ import {useForm} from "react-hook-form";
 const SignIn = (props) => {
 
     const {register, handleSubmit, errors} = useForm();
+    if (errors){
+        console.log(errors)
+    }
     const onSubmit = (value) => {
         props.signIn(value.email, value.password);
     };

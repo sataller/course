@@ -1,22 +1,16 @@
 .main {
-    /*min-height: 100vh;*/
     display: grid;
-    grid-template-rows: 2fr 10fr;
+    grid-template-rows: 100px 10fr;
     grid-template-columns: 100%;
     grid-template-areas: "nav " "cont";
 }
 
 .nav {
     grid-area: nav;
-    /*background-color: rgba(172, 172, 172, 0.5);*/
-    margin: 30px;
-    /*border-radius: 10px;*/
 
 }
 
 .content {
     grid-area: cont;
-    /*background-color: rgba(172, 172, 172, 0.5);*/
-    /*border-radius: 10px;*/
-    margin: 30px;
+    margin: 20px;
 }

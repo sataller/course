@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUser, updateUser} from "../../redux/userReducer";
 import {setUserHistories, updateHistory, updateHistoryAuthor} from "../../redux/historyReducer";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 
 class ProfileContainer extends React.Component {
@@ -15,6 +15,9 @@ class ProfileContainer extends React.Component {
     };
 
     render() {
+        if (!this.props.isAuth){
+            return <Redirect to={"/auth/login"}/>
+        }
         if (!this.props.userProfile) {
             return <Preloader/>
         }
@@ -31,6 +34,7 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
+    isAuth: state.authPage.isAuth,
     authUser: state.authPage.authUser,
     userProfile: state.userPage.userProfile,
     histories: state.historyPage.histories,

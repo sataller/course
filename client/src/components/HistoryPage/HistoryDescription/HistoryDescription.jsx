@@ -8,16 +8,15 @@ const HistoryDescription = (props) => {
     const body = htmlParser(props.description);
 
     return (
-        <div>
-            {body}
-            <NavLink to={`/editor/${props.historyId}`}>
+        <span>
+              {props.edit && <NavLink className={style.link} to={`/editor/${props.historyId}`}>
                 <span className={style.icon}>
                 <CreateIcon titleAccess={"Click to open redactor"}
-                            fontSize="small"/>
+                            />
             </span>
-            </NavLink>
-
-        </div>
+              </NavLink>}
+            {body}
+        </span>
     )
 };
 

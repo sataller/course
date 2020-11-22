@@ -83,6 +83,10 @@ const storiesSchema = new Schema({
                 user: {
                     ref: 'users',
                     type: Schema.Types.ObjectId,
+                },
+                userName:{
+                    type: String,
+                    required: true,
                 }
             }
         ],

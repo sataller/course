@@ -3,8 +3,13 @@
 }
 
 .icon{
-    color: grey;
     margin-left: 10px;
     cursor: pointer;
     vertical-align: top;
+}
+
+.link{
+    color: orange;
+    display: flex;
+    float: right;
 }

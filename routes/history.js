@@ -8,7 +8,7 @@ passportAuth = passport.authenticate('jwt', {"session": false});
 
 router.get('/', controller.getHistories);
 router.get('/:userId', controller.getUserHistories);
-router.get('/read/:historyId', passportAuth, controller.getHistory);
+router.get('/read/:historyId', controller.getHistory);
 router.post('/create', passportAuth, controller.create);
 router.patch('/:historyId', passportAuth, controller.update);
 router.patch('/', passportAuth, controller.updateAuthor);
@@ -16,7 +16,6 @@ router.patch('/:historyId/:chapterId', passportAuth,
     upload.upload, controller.updateChapter);
 router.post('/:historyId/chapter', passportAuth,
     upload.upload, controller.createChapter);
-router.post('/:historyId/comments', passportAuth, controller.createComment);
 router.delete('/:historyId', passportAuth, controller.remove);
 router.delete('/:historyId/:chapterId', passportAuth, controller.removeChapter);
 

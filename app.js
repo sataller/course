@@ -7,6 +7,9 @@ const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const socket = require('./middleware/socket');
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
@@ -33,4 +36,6 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-module.exports = app;
+socket.socket(io);
+
+module.exports = http;

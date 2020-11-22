@@ -184,43 +184,6 @@ module.exports.createChapter = async function (req, res) {
     }
 };
 
-module.exports.createComment = async function (req, res) {
-    const history = await History.findById(req.params.historyId);
-    let update;
-    if (history.comments) {
-        update = {
-            updateDate: Date.now,
-            comments: [...history.comments,
-                {
-                    body: req.body.body,
-                    user: req.body.user,
-                }
-            ]
-        }
-    } else {
-        update = {
-            updateDate: Date.now,
-            comments: [{
-                body: req.body.body,
-                user: req.body.user,
-            }]
-        }
-    }
-    try {
-        const history = await History.findOneAndUpdate(
-            {_id: req.params.historyId},
-            {$set: update},
-            {
-                new: true,
-                useFindAndModify: false
-            }
-        );
-        res.status(200).json({history, resultCode: 0});
-    } catch (e) {
-        errorHandler(res, e);
-    }
-};
-
 module.exports.remove = async function (req, res) {
     try {
         await History.remove({_id: req.params.historyId});

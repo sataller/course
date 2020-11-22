@@ -13,7 +13,9 @@ class MainPageContainer extends React.Component {
     render() {
         return (
             <div className={styles.main}>
-                <div className={styles.nav}><NavBarContainer/></div>
+                <div className={styles.nav}>
+                    <NavBarContainer/>
+                </div>
                 <div className={styles.content}>
                     <HistoryItems histories={this.props.histories}
                                   authUser={this.props.authUser}
@@ -25,6 +27,7 @@ class MainPageContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
+    isAuth: state.authPage.isAuth,
     histories: state.historyPage.histories,
     authUser: state.authPage.authUser,
 });

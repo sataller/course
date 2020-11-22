@@ -20,6 +20,7 @@ function Upload(props) {
         <div className={style.thumb} key={file.name}>
             <div className={style.thumbInner}>
                 <img
+                    alt=""
                     src={file.preview}
                     className={style.img}
                 />

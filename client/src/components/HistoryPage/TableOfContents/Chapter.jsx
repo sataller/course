@@ -36,13 +36,13 @@ const Chapter = (props) => {
     return (
         <div className={style.chapterName}>
             {!props.role && <span>
-                    {props.title}
+                    {`${props.itemNumber}. ${props.title}`}
                 </span>}
             {props.role &&
             <div>
                 {!edit &&
-                <span onDoubleClick={activateEditMode} title={"Double click to edit title"}>{
-                    props.title}
+                <span onDoubleClick={activateEditMode} title={"Double click to edit title"}>
+                     {`${props.itemNumber}. ${props.title}`}
                     </span>}
                 {edit &&
                 <input value={title} onChange={changeTitle}
