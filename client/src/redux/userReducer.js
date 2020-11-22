@@ -19,6 +19,7 @@ const userReducer = (state = initialization, action) => {
                 users: action.users,
             };
         case UPDATE_USER:
+            debugger
             return {
                 ...state,
                 users: state.users.map(i => {

@@ -45,8 +45,6 @@ export const signIn = (email, password) => async (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
-        debugger
-
         if (data.resultCode === 0) {
             let date = new Date();
             let timestamp = date.getTime().toString();
