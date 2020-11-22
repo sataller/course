@@ -8,6 +8,13 @@ import htmlParser from "react-html-parser";
 import CommentsContainer from "./Comments/CommentsContainer";
 
 const HistoryPage = (props) => {
+    let role = false;
+    if (props.authUser) {
+        if (props.history.author.user === props.authUser.id ||
+            props.authUser.role === "admin") {
+            role = true;
+        }
+    }
 
     let items = props.history.chapters.map(i => <ChapterItem key={i._id} image={i.imageSrc} title={i.title}
                                                              body={i.body}/>
@@ -23,12 +30,14 @@ const HistoryPage = (props) => {
             <div className={styles.itemInfo}>
                 <HistoryInfo authUser={props.authUser}
                              updateHistory={props.updateHistory}
+                             edit={role}
                              deleteHistory={props.deleteHistory}
                              history={props.history}/>
             </div>
             <div className={styles.tableOfContents}>
                 <TableOfContents history={props.history}
                                  authUser={props.authUser}
+                                 role={role}
                                  deleteChapter={props.deleteChapter}
                                  updateChapter={props.updateChapter}/>
             </div>
@@ -37,7 +46,7 @@ const HistoryPage = (props) => {
                 {items}
             </div>
             <div className={styles.comment}>
-                <CommentsContainer/>
+                <CommentsContainer role={role}/>
             </div>
         </div>
     )

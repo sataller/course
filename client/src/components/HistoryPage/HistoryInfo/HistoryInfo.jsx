@@ -50,16 +50,6 @@ const HistoryInfo = (props) => {
         props.deleteHistory({historyId: props.history._id});
     };
 
-    let edit = false;
-    if (props.authUser) {
-        if (props.authUser.id === props.history.author.user ||
-            props.authUser.role === "admin") {
-            edit = true
-        } else {
-            edit = false
-        }
-    }
-
     const tags = props.history.tags.map(i => i.tagName);
 
     return (
@@ -67,13 +57,13 @@ const HistoryInfo = (props) => {
             <div>
                 <span>
                     <h3>
-                       {edit && <Title title={props.history.title} edit={edit}
+                       {props.edit && <Title title={props.history.title} edit={props.edit}
                                        updateTitle={updateTitle}/>}
-                        {!edit && props.history.title}
+                        {!props.edit && props.history.title}
                         <span className={styles.lick}>
                             <StarBorderIcon/> {props.history.rating.ratingNumber}
                         </span>
-                        {edit && <ModalWindow delete={deleteHistory}/>}
+                        {props.edit && <ModalWindow delete={deleteHistory}/>}
                     </h3>
                     <span className={styles.lick}>
                        <SimpleRating updateRating={updateRating}
@@ -95,7 +85,7 @@ const HistoryInfo = (props) => {
                 </div>
                 <Dropdown.Divider/>
                 <div className={styles.description}>
-                    <HistoryDescription edit={edit} historyId={props.history._id} description={props.history.description}/>
+                    <HistoryDescription edit={props.edit} historyId={props.history._id} description={props.history.description}/>
                 </div>
             </div>
         </div>

@@ -29,16 +29,16 @@ const Comments = (props) => {
             <div>
                 {items}
             </div>
-            <form onSubmit={handleSubmit(addComment)}>
+         {props.role && <form onSubmit={handleSubmit(addComment)}>
                 <Form.Group controlId="exampleForm.ControlComment">
                     <Form.Control as="textarea" rows={3} placeholder="Enter comment"
                                   name="comment" ref={register({required: true, mnLength: 1})}/>
                 </Form.Group>
                 {errors.comment && <span className={styles.error}>"Comment is required"</span>}
                 <Button className={styles.button} variant="outline-primary" type="submit">
-                    Create
+                    Add
                 </Button>
-            </form>
+            </form>}
         </div>
     )
 };

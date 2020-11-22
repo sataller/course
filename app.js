@@ -2,14 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const authRotes = require('./routes/auth');
 const historyRotes = require('./routes/history');
 const userRotes = require('./routes/user');
 const keys = require('./config/keys');
-const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-const socket = require('./middleware/socket');
+const socket = require("./controllers/history");
+
 
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use('/api/auth', authRotes);
 app.use('/api/history', historyRotes);
 app.use('/api/users', userRotes);
+socket.socketComments(io);
 
 if (process.env.NODE_ENV === "production") {
     app.use('/', express.static(path.join('client', 'build')));
@@ -36,6 +38,5 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-socket.socket(io);
 
 module.exports = http;

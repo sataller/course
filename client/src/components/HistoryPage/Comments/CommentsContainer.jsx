@@ -17,6 +17,7 @@ class CommentsContainer extends React.Component {
                 <Comments sendNewComment={this.props.sendNewComment}
                           readableHistory={this.props.readableHistory}
                           authUser={this.props.authUser}
+                          role={this.props.role}
                           comments={this.props.comments}
                 />
             </div>
