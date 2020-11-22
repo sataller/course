@@ -33,7 +33,8 @@ const HistoryInfo = (props) => {
         if (props.authUser) {
             props.updateHistory({
                 historyId: props.history._id,
-                rating: value});
+                rating: value
+            });
         } else {
             alert("You are not logged in")
         }
@@ -86,8 +87,8 @@ const HistoryInfo = (props) => {
                 </div>
                 <span className={styles.lick}
                       onClick={updateLike}>
-                        <FavoriteIcon
-                            color="secondary"/> {props.history.like.likeNumber}
+                        <FavoriteIcon color="secondary"/>
+                    {props.history.like.likeNumber}
                     </span>
                 <div className={styles.info}>
                     <span>Tags: {tags.join(", ")}</span>

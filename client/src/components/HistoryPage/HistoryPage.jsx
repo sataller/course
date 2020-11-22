@@ -5,12 +5,16 @@ import NavBarContainer from "../Navbar/NavbarContainet";
 import Comments from "./Comments/Comments";
 import HistoryInfo from "./HistoryInfo/HistoryInfo";
 import TableOfContents from "./TableOfContents/TableOfContents";
+import htmlParser from "react-html-parser";
 
 const HistoryPage = (props) => {
 
     let items = props.history.chapters.map(i => <ChapterItem key={i._id} image={i.imageSrc} title={i.title}
                                                              body={i.body}/>
     );
+
+    const description = htmlParser(props.history.description);
+
     return (
         <div className={styles.content}>
             <div className={styles.nav}>
@@ -29,7 +33,7 @@ const HistoryPage = (props) => {
                                  updateChapter={props.updateChapter}/>
             </div>
             <div className={styles.item}>
-                {props.history.description}
+                {description}
                 {items}
             </div>
             <div className={styles.comment}>

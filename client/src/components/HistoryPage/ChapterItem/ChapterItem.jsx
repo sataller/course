@@ -8,7 +8,9 @@ const chapterItem = (props) => {
     if (props.body.length > 600) {
         padding = false;
     }
+
     const body = htmlParser(props.body);
+
     return (
         <div className={padding ? styles.chapter : null}>
             <span className={styles.title}>
