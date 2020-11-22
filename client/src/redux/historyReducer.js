@@ -1,14 +1,14 @@
 import * as axios from "axios"
 import socket from "../components/common/socket.io/socket";
 
-const SET_HISTORIES = "network/auth/SET_HISTORIES";
-const UPDATE_HISTORY = "network/auth/UPDATE_USERS";
-const SET_HISTORY = "network/auth/SET_HISTORY";
-const SET_UPDATED_HISTORY_ID = "network/auth/SET_UPDATED_HISTORY_ID";
-const ADD_NEW_HISTORY = "network/auth/ADD_NEW_HISTORY";
-const DELETE_HISTORY = "network/auth/DELETE_HISTORY";
-const SET_DELETE_HISTORY_ID = "network/auth/SET_DELETE_HISTORY_ID";
-const UPDATE_COMMENTS = "network/auth/UPDATE_COMMENTS";
+const SET_HISTORIES = "network/history/SET_HISTORIES";
+const UPDATE_HISTORY = "network/history/UPDATE_USERS";
+const SET_HISTORY = "network/history/SET_HISTORY";
+const SET_UPDATED_HISTORY_ID = "network/history/SET_UPDATED_HISTORY_ID";
+const ADD_NEW_HISTORY = "network/history/ADD_NEW_HISTORY";
+const DELETE_HISTORY = "network/history/DELETE_HISTORY";
+const SET_DELETE_HISTORY_ID = "network/history/SET_DELETE_HISTORY_ID";
+const UPDATE_COMMENTS = "network/history/UPDATE_COMMENTS";
 
 let initialization = {
     histories: [],

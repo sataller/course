@@ -1,6 +1,8 @@
 {
   "dev": {
-    "default-src": ["'self'"],
+    "default-src": [
+      "'self'"
+    ],
     "font-src": [
       "'self'",
       "https://fanficforumweb.herokuapp.com/",
@@ -24,10 +26,9 @@
       "'self'",
       "https://courseprojectbucket.s3.amazonaws.com/"
     ]
-    },
-    "connect-src": [
-      "'self'",
-      "https://fanficforumweb.herokuapp.com/"
-    ]
-  }
+  },
+  "connect-src": [
+    "'self'",
+    "https://fanficforumweb.herokuapp.com/"
+  ]
 }

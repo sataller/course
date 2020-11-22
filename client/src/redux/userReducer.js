@@ -1,9 +1,9 @@
 import {getAuthUserData, signOut} from "./authReducer";
 
-const SET_USERS = "network/auth/SET_USER_DATA";
-const UPDATE_USER = "network/auth/UPDATE_USERS";
-const SET_USER = "network/auth/SET_USER";
-const REMOVE_USER = "network/auth/REMOVE_USER";
+const SET_USERS = "network/user/SET_USER_DATA";
+const UPDATE_USER = "network/user/UPDATE_USERS";
+const SET_USER = "network/user/SET_USER";
+const REMOVE_USER = "network/user/REMOVE_USER";
 
 let initialization = {
     users: [],
