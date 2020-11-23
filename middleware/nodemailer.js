@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
             rejectUnauthorized: false
         },
     },
-
     {
         from: keys.nodeMailer.name,
     });

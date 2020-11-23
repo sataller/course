@@ -6,6 +6,7 @@ import HistoryInfo from "./HistoryInfo/HistoryInfo";
 import TableOfContents from "./TableOfContents/TableOfContents";
 import htmlParser from "react-html-parser";
 import CommentsContainer from "./Comments/CommentsContainer";
+import {ScrollingProvider} from "react-scroll-section";
 
 const HistoryPage = (props) => {
     let role = false;
@@ -16,7 +17,8 @@ const HistoryPage = (props) => {
         }
     }
 
-    let items = props.history.chapters.map(i => <ChapterItem key={i._id} image={i.imageSrc} title={i.title}
+    let items = props.history.chapters.map(i => <ChapterItem key={i._id} id={i._id}
+                                                             image={i.imageSrc} title={i.title}
                                                              body={i.body}/>
     );
 
@@ -34,17 +36,19 @@ const HistoryPage = (props) => {
                              deleteHistory={props.deleteHistory}
                              history={props.history}/>
             </div>
-            <div className={styles.tableOfContents}>
-                <TableOfContents history={props.history}
-                                 authUser={props.authUser}
-                                 role={role}
-                                 deleteChapter={props.deleteChapter}
-                                 updateChapter={props.updateChapter}/>
-            </div>
-            <div className={styles.item}>
-                {description}
-                {items}
-            </div>
+            <ScrollingProvider>
+                <div className={styles.tableOfContents}>
+                    <TableOfContents history={props.history}
+                                     authUser={props.authUser}
+                                     role={role}
+                                     deleteChapter={props.deleteChapter}
+                                     updateChapter={props.updateChapter}/>
+                </div>
+                <div className={styles.item}>
+                    {description}
+                    {items}
+                </div>
+            </ScrollingProvider>
             <div className={styles.comment}>
                 <CommentsContainer role={role}/>
             </div>

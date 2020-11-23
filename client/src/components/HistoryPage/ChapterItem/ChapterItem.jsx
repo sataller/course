@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../historyPage.module.css";
 import {Image} from "react-bootstrap";
 import htmlParser from "react-html-parser";
+import {Section} from "react-scroll-section";
 
 const chapterItem = (props) => {
     let padding = true;
@@ -15,7 +16,9 @@ const chapterItem = (props) => {
         <div className={padding ? styles.chapter : null}>
             <span className={styles.title}>
                 <h4>***</h4>
-                <h4>{props.title}</h4>
+               <Section id={props.id}>
+                   <h4>{props.title}</h4>
+               </Section>
             </span>
             <span>
                 <Image className={styles.image} src={props.image} rounded/>

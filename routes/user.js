@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const controller = require ('../controllers/user');
 
+//http://localhost:5000/user
 passportAuth = passport.authenticate('jwt', {"session": false});
 
 router.get('/:userId', passportAuth, controller.getByUserId);

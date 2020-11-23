@@ -8,10 +8,8 @@ const ChapterCreatePage = (props) => {
     const [file, setFilesToDownload] = useState([]);
 
 
-    const {register, handleSubmit, errors} = useForm();
-    if (errors){
-        console.log(errors)
-    }
+    const {register, handleSubmit} = useForm();
+
     const onSubmit = (value) => {
         props.createChapter({
             title: value.title,

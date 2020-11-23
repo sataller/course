@@ -1,7 +1,6 @@
 const LOGIN = "network/auth/LOGIN";
 const LOGOUT = "network/auth/LOGOUT";
 
-
 let initialization = {
     isAuth: false,
     authUser: null,
@@ -77,22 +76,19 @@ export const getAuthUserData = () => async (dispatch) => {
     })
 };
 
-export const signUp = (email, name, password) => async (dispatch) => {
+export const signUp = (data) => async (dispatch) => {
     fetch('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify({email, name, password}),
+        body: JSON.stringify({...data}),
         headers: {
             "Content-type": "application/json",
         }
     })
         .then(response => response.json()).then(data => {
-        if (data.resultCode === 0) {
-            console.log(data);
-            alert(data.message);
+        if (data.resultCode === 0 && window) {
+            window.location.href = "/register/complete";
         } else {
             console.log(data);
-            alert(data.message);
-
         }
     })
 };

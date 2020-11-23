@@ -11,7 +11,6 @@ const userRotes = require('./routes/user');
 const keys = require('./config/keys');
 const socket = require("./controllers/history");
 
-
 const url = process.env.MONGO_URL || keys.mongoURI;
 mongoose.connect(url,
     {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
@@ -30,19 +29,11 @@ app.use('/api/history', historyRotes);
 app.use('/api/users', userRotes);
 socket.socketComments(io);
 
-// if (process.env.NODE_ENV === "production") {
-//     app.use('./', express.static(path.join('client', 'build')));
-//     app.get('*', (req, res) => {
-//         res.sendFile(path.join(__dirname + 'client', 'build',
-//             'index.html'));
-//     });
-// }
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '/client/build')));
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname + '/client/build', '/index.html'));
     });
 }
-
 
 module.exports = http;

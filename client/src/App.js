@@ -55,8 +55,9 @@ class App extends React.Component {
                     <Route path="/editor/:historyId" render={() => <EditorContainer/>}/>
                     <Route path="/auth/login" render={() => <SignInContainer/>}/>
                     <Route path="/auth/register" render={() => <SignUpContainer/>}/>
-                    <Route path="/auth/complete" render={() => <RegisterCompletedPage/>}/>
+                    <Route path="/register/complete" render={() => <RegisterCompletedPage/>}/>
                     <Route path="/auth/confirmed" render={() => <RegisterConfirmedPage/>}/>
+                    {/*<Route path="/auth/confirm/:userId?" render={() => <RegisterConfirmedPage/>}/>*/}
                     <Route path="*" render={() => <div> 404 NOT FOUND</div>}/>
                 </Switch>
             </div>

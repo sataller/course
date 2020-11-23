@@ -5,10 +5,9 @@ import styles from "./signUpPage.module.css"
 import {NavLink} from "react-router-dom";
 
 const SignUp = (props) => {
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit} = useForm();
     const onSubmit = (data) => {
-        props.signUp(data.email, data.name, data.password);
-        alert(props.message)
+        props.signUp(data);
     };
     return (
         <div className={styles.wrapper}>

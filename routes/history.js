@@ -4,6 +4,7 @@ const router = express.Router();
 const upload = require('../middleware/upload');
 const controller = require('../controllers/history');
 
+//http://localhost:5000/history
 passportAuth = passport.authenticate('jwt', {"session": false});
 
 router.get('/', controller.getHistories);

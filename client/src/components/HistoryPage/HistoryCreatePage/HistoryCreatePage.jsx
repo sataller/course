@@ -4,10 +4,8 @@ import {useForm} from "react-hook-form";
 import styles from "./createHistoryPage.module.css";
 
 const HistoryCreatePage = (props) => {
-    const {register, handleSubmit, errors} = useForm();
-    if (errors){
-        console.log(errors)
-    }
+    const {register, handleSubmit} = useForm();
+
     const onSubmit = (value) => {
         props.createHistory({
             title: value.title,
