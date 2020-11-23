@@ -33,7 +33,7 @@
     "start": "react-scripts start",
     "build": "cd client && npm run build",
     "startApp": "npm run build && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install \"npm run build\""
   },
   "devDependencies": {
     "nodemon": "^2.0.6",
