@@ -1,5 +1,4 @@
 import React from "react"
-import styles from "./historyItems.module.css"
 import Item from "./Item/Item";
 
 const HistoryItems = (props) => {
@@ -12,7 +11,7 @@ const HistoryItems = (props) => {
                                                  updateHistory={props.updateHistory}/>);
 
     return (
-        <div className={styles.content}>
+        <div>
             {items}
         </div>
     )

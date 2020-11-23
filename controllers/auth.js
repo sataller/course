@@ -17,7 +17,8 @@ module.exports.login = async function (req, res) {
                         role: candidate.role,
                         them: candidate.them,
                         userId: candidate._id
-                    }, keys.jwt, {expiresIn: 135 * 135});
+                    }, process.env.JWT || keys.jwt,
+                        {expiresIn: 135 * 135});
                     res.status(200).json({
                         token: `Bearer ${token}`,
                         user: {

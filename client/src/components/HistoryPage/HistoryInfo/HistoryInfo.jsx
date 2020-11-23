@@ -29,7 +29,6 @@ const HistoryInfo = (props) => {
     };
 
     const updateRating = (value) => {
-        debugger
         if (props.authUser) {
             props.updateHistory({
                 historyId: props.history._id,
@@ -58,7 +57,7 @@ const HistoryInfo = (props) => {
                 <span>
                     <h3>
                        {props.edit && <Title title={props.history.title} edit={props.edit}
-                                       updateTitle={updateTitle}/>}
+                                             updateTitle={updateTitle}/>}
                         {!props.edit && props.history.title}
                         <span className={styles.lick}>
                             <StarBorderIcon/> {props.history.rating.ratingNumber}
@@ -85,7 +84,8 @@ const HistoryInfo = (props) => {
                 </div>
                 <Dropdown.Divider/>
                 <div className={styles.description}>
-                    <HistoryDescription edit={props.edit} historyId={props.history._id} description={props.history.description}/>
+                    <HistoryDescription edit={props.edit} historyId={props.history._id}
+                                        description={props.history.description}/>
                 </div>
             </div>
         </div>

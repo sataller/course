@@ -23,7 +23,7 @@ const UserDescription = (props) => {
     };
     return (
         <div>
-            <span> О себе:</span>
+            <span> About me:</span>
             {!editDescription &&
             <div>
                 <span>

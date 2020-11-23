@@ -24,7 +24,7 @@ const UserName = (props) => {
         setName(e.currentTarget.value);
     };
     return (
-        <div className={styles.author}>
+        <div>
             {!editName &&
             <span>
                         <NavLink to={`/profile/${props.userProfile.id}`}>

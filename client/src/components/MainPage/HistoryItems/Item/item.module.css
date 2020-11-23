@@ -1,7 +1,6 @@
 .item{
     border-radius: 10px;
     background-color: rgba(169, 169, 169, 0.4);
-    color: orange;
     padding: 20px;
     margin-bottom: 10px;
 }
@@ -11,27 +10,10 @@
     padding: 10px;
 }
 
-a{
-    color: #999999;
-    text-decoration: none;
-}
-a:hover{
-    color: #999999;
-    /*text-decoration: none;*/
-}
-
 .lick{
     cursor: pointer;
 }
 
 .editButton{
     float:right;
-}
-
-.info{
-
-}
-
-.description{
-
 }

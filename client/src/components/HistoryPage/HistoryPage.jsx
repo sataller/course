@@ -6,7 +6,6 @@ import HistoryInfo from "./HistoryInfo/HistoryInfo";
 import TableOfContents from "./TableOfContents/TableOfContents";
 import htmlParser from "react-html-parser";
 import CommentsContainer from "./Comments/CommentsContainer";
-import {ScrollingProvider} from "react-scroll-section";
 
 const HistoryPage = (props) => {
     let role = false;
@@ -14,6 +13,15 @@ const HistoryPage = (props) => {
         if (props.history.author.user === props.authUser.id ||
             props.authUser.role === "admin") {
             role = true;
+        }
+    }
+
+    let background ;
+    if (props.authUser) {
+        if (props.authUser.them === "day"){
+            background = styles.day;
+        } else {
+            background = styles.night;
         }
     }
 
@@ -29,28 +37,30 @@ const HistoryPage = (props) => {
             <div className={styles.nav}>
                 <NavBarContainer/>
             </div>
-            <div className={styles.itemInfo}>
-                <HistoryInfo authUser={props.authUser}
-                             updateHistory={props.updateHistory}
-                             edit={role}
-                             deleteHistory={props.deleteHistory}
-                             history={props.history}/>
-            </div>
-            <ScrollingProvider>
-                <div className={styles.tableOfContents}>
-                    <TableOfContents history={props.history}
-                                     authUser={props.authUser}
-                                     role={role}
-                                     deleteChapter={props.deleteChapter}
-                                     updateChapter={props.updateChapter}/>
+            <div className={styles.contentWrapper}>
+                <div className={styles.itemInfo}>
+                    <HistoryInfo authUser={props.authUser}
+                                 updateHistory={props.updateHistory}
+                                 edit={role}
+                                 deleteHistory={props.deleteHistory}
+                                 history={props.history}/>
                 </div>
-                <div className={styles.item}>
-                    {description}
-                    {items}
+                    <div className={styles.tableOfContents}>
+                        <TableOfContents history={props.history}
+                                         authUser={props.authUser}
+                                         role={role}
+                                         deleteChapter={props.deleteChapter}
+                                         updateChapter={props.updateChapter}/>
+                    </div>
+                    <div className={`${styles.item} + ${background}`}>
+                        <div className={styles.description}>
+                            {description}
+                        </div>
+                        {items}
+                    </div>
+                <div className={styles.comment}>
+                    <CommentsContainer/>
                 </div>
-            </ScrollingProvider>
-            <div className={styles.comment}>
-                <CommentsContainer role={role}/>
             </div>
         </div>
     )

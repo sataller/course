@@ -10,6 +10,10 @@
 
 .buttons a{
     text-decoration: none;
+    color: black;
+}
+.buttons a:hover{
+    color: black;
 }
 
 .signButtons {
@@ -18,3 +22,4 @@
     justify-content: flex-end;
     padding: 10px;
 }
+

@@ -28,7 +28,7 @@ const HistoryCreatePage = (props) => {
                     <Form.Control as="textarea" rows={3} placeholder="Enter description"
                                   name="description" ref={register({required: true, mnLength: 1})}/>
                 </Form.Group>
-                <Button  variant="outline-primary" type="submit">
+                <Button  variant="primary" type="submit">
                     Create
                 </Button>
             </form>

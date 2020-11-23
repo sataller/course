@@ -3,17 +3,41 @@
 }
 
 .night {
-    background: url("./assets/nightMode.jpg");
+    width: 100%;
+    background: url("./assets/night_2.jpg");
     background-attachment: fixed;
-    /*background-color: #3B3355;*/
     color: white;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+}
+
+.night a{
+    color: #999999;
+    text-decoration: none;
+}
+.night a:hover{
+    color: #999999;
 }
 
 .day {
     color: black;
-    background-image: url("./assets/day.jpg");
+    background-image: url("./assets/day_2.jpg");
     background-attachment: fixed;
-    /*background-color: #FEE9E1;*/
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+}
+
+.day a{
+    color: #0b0b0b;
+    text-decoration: none;
+    font-weight: bold;
+}
+.day a:hover{
+    color: #292929;
 }
 
 

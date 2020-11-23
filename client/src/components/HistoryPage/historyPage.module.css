@@ -1,55 +1,71 @@
 .content {
-    /*display: inline-grid;*/
     display: grid;
-    color: orange;
-    grid-template-rows: 100px 0.1fr 0.1fr 0.1fr 0.1fr;
+    grid-template-rows: 150px 5fr ;
     grid-template-columns: 100%;
-    grid-template-areas: "nav" "itemInfo" "tableOfContents" "item" "comment";
+    grid-template-areas: "nav" "contentWrapper";
 }
 
 .nav {
     grid-area: nav;
 }
 
+.contentWrapper{
+    grid-area: contentWrapper;
+}
+
+.night{
+    background-color: rgba(153, 153, 153, 0.2);
+
+}
+
+.day{
+    background-color: rgba(153, 153, 153, 0.8);
+}
+
 .item {
-    background-color: rgba(153, 153, 153, 0.3);
+    display: block;
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
-text-align: center;
     grid-area: item;
+    text-align: left;
+    font-size: larger;
 }
 
 .tableOfContents {
-    background-color: rgba(153, 153, 153, 0.3);
+    display: block;
+    background-color: rgba(153, 153, 153, 0.5);
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
-
     grid-area: tableOfContents;
+    min-height: 200px;
 }
 
 .itemInfo {
+    display: block;
     margin: 20px;
+    min-height: 300px;
     grid-area: itemInfo;
 }
 
 .comment {
+    display: block;
     background-color: rgba(153, 153, 153, 0.3);
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
-
+    min-height: 200px;
     grid-area: comment;
 }
 
-.image{
+.image {
     max-width: 250px;
     float: left;
-    margin: 2% 2% 2% 2%;
+    margin: 5% 2% 2% 2%;
 }
 
-.chapter{
+.chapter {
     padding-top: 20px;
     padding-bottom: 200px;
 }
@@ -58,30 +74,40 @@ text-align: center;
     cursor: pointer;
 }
 
-.icon a{
-    color: orange;
-}
-
-.icon{
-    color: grey;
+.icon {
     margin-left: 10px;
     cursor: pointer;
     vertical-align: top;
 }
 
-.title{
+.title {
     text-align: center;
 }
 
-.chapterName{
+.chapterName {
     padding: 5px;
 }
-.button{
+
+.button {
     margin-top: 5px;
 }
-.modal{
+
+.modal {
     display: inline-block;
 }
-.modalButton{
+
+.modalButton {
     margin-left: 25%;
+}
+
+.body {
+    padding: 50px;
+    text-align: left;
+    font-size: larger;
+}
+
+.description{
+    padding: 50px;
+    text-align: left;
+    font-size: larger;
 }

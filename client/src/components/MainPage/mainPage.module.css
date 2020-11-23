@@ -1,6 +1,6 @@
 .main {
     display: grid;
-    grid-template-rows: 100px 10fr;
+    grid-template-rows: 150px 10fr;
     grid-template-columns: 100%;
     grid-template-areas: "nav " "cont";
 }

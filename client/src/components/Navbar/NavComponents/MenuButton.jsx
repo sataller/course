@@ -31,7 +31,7 @@ const MenuButton = (props) => {
 
     return (
         <div className={styles.signButtons}>
-            <DropdownButton className={styles.buttons} variant="outline-secondary"
+            <DropdownButton className={styles.buttons} variant="dark"
                             id="dropdown-basic-button" title="Menu">
                 {role && <NavLink to={"/admin"}> <Dropdown.Item href="/admin">Admin</Dropdown.Item></NavLink>}
                 <NavLink to={"/main"}><Dropdown.Item href="/main">Main</Dropdown.Item></NavLink>

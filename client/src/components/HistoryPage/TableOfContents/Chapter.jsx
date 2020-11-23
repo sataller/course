@@ -3,10 +3,10 @@ import style from "../historyPage.module.css";
 import CreateIcon from "@material-ui/icons/Create";
 import {NavLink} from "react-router-dom";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
-import {useScrollSection} from "react-scroll-section";
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
+import {goToAnchor} from "react-scrollable-anchor";
 
 const Chapter = (props) => {
-    const chapterSection = useScrollSection(props.id);
 
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(props.title);
@@ -38,15 +38,14 @@ const Chapter = (props) => {
 
     return (
         <div className={style.chapterName}>
-            {!props.role && <span onClick={chapterSection.onClick}
-                                  selected={chapterSection.selected}>
+            {!props.role && <span>
                     {`${props.itemNumber}. ${props.title}`}
                 </span>}
             {props.role &&
             <div>
                 {!edit &&
-                <span onDoubleClick={activateEditMode} title={"Double click to edit title"}
-                      onClick={chapterSection.onClick} selected={chapterSection.selected}>
+                <span onDoubleClick={activateEditMode}
+                      title={"Double click to edit title"}>
                      {`${props.itemNumber}. ${props.title}`}
                     </span>}
                 {edit &&
@@ -58,7 +57,9 @@ const Chapter = (props) => {
                                         fontSize="small"/>
                         </span>
                 </NavLink>
-
+                <RemoveRedEyeIcon className={style.icon} onClick={() => {
+                    goToAnchor(props.id, false)
+                }}/>
                 <ModalWindow delete={deleteChapter}/>
             </div>}
 

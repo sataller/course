@@ -1,8 +1,12 @@
 .content {
     display: grid;
-    grid-template-rows: 100px 200px 2fr;
+    grid-template-rows: 150px 2fr;
     grid-template-columns: 100%;
-    grid-template-areas: "nav" "info" "items";
+    grid-template-areas: "nav" "contentWrapper";
+}
+
+.contentWrapper{
+    grid-area: contentWrapper;
 }
 
 .nav {
@@ -10,20 +14,20 @@
 }
 
 .items {
-    grid-area: items;
+    display: block;
 }
 
 .userInfo {
+    display: block;
+    min-height: 150px;
     border-radius: 10px;
     background-color: rgba(169, 169, 169, 0.4);
-    color: orange;
     padding: 20px;
     margin: 20px;
     grid-area: info;
 }
 
 .icon {
-    color: grey;
     margin: 20px;
     cursor: pointer;
     vertical-align: top;
@@ -32,7 +36,6 @@
 .item {
     border-radius: 10px;
     background-color: rgba(169, 169, 169, 0.4);
-    color: orange;
     padding: 20px;
     margin: 20px;
 }

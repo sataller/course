@@ -19,7 +19,6 @@ const userReducer = (state = initialization, action) => {
                 users: action.users,
             };
         case UPDATE_USER:
-            debugger
             return {
                 ...state,
                 users: state.users.map(i => {
@@ -43,8 +42,7 @@ const userReducer = (state = initialization, action) => {
         default:
             return state
     }
-}
-
+};
 
 export const initializeUsers = (users) => ({type: SET_USERS, users});
 export const refreshUser = (user) => ({type: UPDATE_USER, user});
@@ -77,15 +75,13 @@ export const updateUser = (userData) => (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
-            debugger
-            if (data.resultCode === 0){
-                dispatch(getAuthUserData());
-                dispatch(refreshUser(data.user));
-                dispatch(setUser(data.user));
-            } else {
-                alert(data.message);
-            }
-
+        if (data.resultCode === 0) {
+            dispatch(getAuthUserData());
+            dispatch(refreshUser(data.user));
+            dispatch(setUser(data.user));
+        } else {
+            alert(data.message);
+        }
     })
 };
 

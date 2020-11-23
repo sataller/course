@@ -28,8 +28,8 @@ const ChapterCreatePage = (props) => {
                 </Form.Group>
             </Form></div>
             <Upload setFilesToDownload={setFilesToDownload}/>
-            <Button className={style.button} variant="outline-info"
-                    as="input" type="submit" value="Submit"/>
+            <Button className={style.button} variant="info"
+                    as="input" type="submit" value="Create"/>
         </form>
     )
 };

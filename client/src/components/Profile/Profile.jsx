@@ -27,20 +27,22 @@
                 <div className={styles.nav}>
                     <NavBarContainer/>
                 </div>
-                <div className={styles.userInfo}>
-                    <UserName updateHistoryAuthor={props.updateHistoryAuthor}
-                              updateUser={props.updateUser}
-                              userProfile={props.userProfile} myPage={role}/>
-                    <UserDescription updateUser={props.updateUser} userProfile={props.userProfile}
-                                     myPage={role}/>
-                    {role && <NavLink to={`/create/history`}>
-                        <Button variant="outline-warning" className={style.button}>
-                            + create new history
-                        </Button>
-                    </NavLink>}
-                </div>
-                <div className={styles.items}>
-                    {items}
+                <div className={styles.contentWrapper}>
+                    <div className={styles.userInfo}>
+                        <UserName updateHistoryAuthor={props.updateHistoryAuthor}
+                                  updateUser={props.updateUser}
+                                  userProfile={props.userProfile} myPage={role}/>
+                        <UserDescription updateUser={props.updateUser} userProfile={props.userProfile}
+                                         myPage={role}/>
+                        {role && <NavLink to={`/create/history`}>
+                            <Button variant="outline-warning" className={style.button}>
+                                + create new history
+                            </Button>
+                        </NavLink>}
+                    </div>
+                    <div className={styles.items}>
+                        {items}
+                    </div>
                 </div>
             </div>
         )
