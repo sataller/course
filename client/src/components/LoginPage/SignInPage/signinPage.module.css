@@ -22,3 +22,12 @@
     justify-content: center;
     margin-top: 20px;
 }
+
+p {
+    color: #bfbf59;
+}
+
+p::before {
+    display: inline;
+    content: "⚠ ";
+}

@@ -40,3 +40,12 @@
 .link{
     margin-left: 10px;
 }
+
+p {
+    color: #bfbf59;
+}
+
+p::before {
+    display: inline;
+    content: "⚠ ";
+}
