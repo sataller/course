@@ -49,7 +49,6 @@ module.exports.getUsers = async function (req, res) {
 
 module.exports.update = async function (req, res) {
     const user = await User.findById(req.params.userId);
-    console.log(req.body)
     const update = {
         name: req.body.name ? req.body.name : user.name,
         status: updateObj.updateUserStatus(user.status, req.body.status),

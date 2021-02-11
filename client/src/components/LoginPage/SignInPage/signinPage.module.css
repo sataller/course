@@ -23,11 +23,11 @@
     margin-top: 20px;
 }
 
-p {
+.error {
     color: #bfbf59;
 }
 
-p::before {
+.error::before {
     display: inline;
     content: "⚠ ";
 }

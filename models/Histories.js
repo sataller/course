@@ -80,9 +80,8 @@ const storiesSchema = new Schema({
                     type: String,
                     required: true,
                 },
-                user: {
-                    ref: 'users',
-                    type: Schema.Types.ObjectId,
+                userId: {
+                    type: String,
                 },
                 userName:{
                     type: String,

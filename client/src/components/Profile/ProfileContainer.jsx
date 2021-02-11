@@ -11,14 +11,13 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         this.props.setUserHistories(this.props.match.params.userId);
         this.props.getUser(this.props.match.params.userId);
-
     };
 
     render() {
         if (!this.props.isAuth){
             return <Redirect to={"/auth/login"}/>
         }
-        if (!this.props.userProfile) {
+            if (!this.props.userProfile) {
             return <Preloader/>
         }
         return (
@@ -38,6 +37,7 @@ let mapStateToProps = (state) => ({
     authUser: state.authPage.authUser,
     userProfile: state.userPage.userProfile,
     histories: state.historyPage.histories,
+    errorMessage: state.userPage.errorMessage,
 });
 let WithRouterProfileContainer = withRouter(ProfileContainer)
 

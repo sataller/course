@@ -17,14 +17,14 @@ const SignUp = (props) => {
                                   ref={register({required: true})}
                                   placeholder="Email address"/>
                     {errors.email?.type === "required" &&
-                    (<p>Your email is required</p>)}
+                    (<p className={styles.error}>Your email is required</p>)}
                 </Form.Group>
                 <Form.Group controlId="formBasicName">
                     <Form.Control type="text" name="name"
                                   ref={register({required: true, mnLength: 1})}
                                   placeholder="User name"/>
                     {errors.name?.type === "required" &&
-                    (<p>Your name is required</p>)}
+                    (<p className={styles.error}>Your name is required</p>)}
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -32,11 +32,11 @@ const SignUp = (props) => {
                                   ref={register({required: true, maxLength:20, minLength: 6})}
                                   placeholder="Password"/>
                     {errors.password?.type === "maxLength" &&
-                    (<p>Your password exceed max length of 20 characters</p>)}
+                    (<p className={styles.error}>Your password exceed max length of 20 characters</p>)}
                     {errors.password?.type === "minLength" &&
-                    (<p>Your password exceed min length of 6 characters</p>)}
+                    (<p className={styles.error}>Your password exceed min length of 6 characters</p>)}
                     {errors.password?.type === "required" &&
-                    (<p>Your password is required</p>)}
+                    (<p className={styles.error}>Your password is required</p>)}
 
                 </Form.Group>
 

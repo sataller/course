@@ -4,11 +4,13 @@ const SET_USERS = "network/user/SET_USER_DATA";
 const UPDATE_USER = "network/user/UPDATE_USERS";
 const SET_USER = "network/user/SET_USER";
 const REMOVE_USER = "network/user/REMOVE_USER";
+const ERROR_MESSAGE = "network/user/ERROR_MESSAGE";
 
 let initialization = {
     users: [],
     selectedUsersId: [],
     userProfile: null,
+    errorMessage: null,
 }
 
 const userReducer = (state = initialization, action) => {
@@ -17,6 +19,11 @@ const userReducer = (state = initialization, action) => {
             return {
                 ...state,
                 users: action.users,
+            };
+            case ERROR_MESSAGE:
+            return {
+                ...state,
+                errorMessage: action.error,
             };
         case UPDATE_USER:
             return {
@@ -48,6 +55,7 @@ export const initializeUsers = (users) => ({type: SET_USERS, users});
 export const refreshUser = (user) => ({type: UPDATE_USER, user});
 export const setUser = (user) => ({type: SET_USER, user});
 export const removeUser = (userId) => ({type: REMOVE_USER, userId});
+export const setError = (error) => ({type: ERROR_MESSAGE, error});
 
 export const setUsers = () => (dispatch) => {
     fetch('/api/users', {
@@ -94,8 +102,10 @@ export const getUser = (userId) => (dispatch) => {
         }
     })
         .then(response => response.json()).then(data => {
-        dispatch(setUser(data.user));
-    })
+            if (data.resultCode === 0){
+                dispatch(setUser(data.user));
+            }
+        })
 };
 
 export const deleteUser = (userId, id) => (dispatch) => {

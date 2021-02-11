@@ -18,8 +18,7 @@ const Comments = (props) => {
         e.target.reset();
 
     };
-
-    const items = props.comments.map(i => <CommentItem userId={i.userId} key={i.userId}
+    const items = props.comments.map(i => <CommentItem authUserId={props.authUser.id} userId={i.userId} key={i.userId}
                                                        userName={i.userName} body={i.body}/>);
 
     return (

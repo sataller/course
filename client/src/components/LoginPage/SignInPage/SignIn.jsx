@@ -19,13 +19,13 @@ const SignIn = (props) => {
                     <Form.Control type="text" name="email" ref={register({required: true})}
                                   placeholder="Email"/>
                     {errors.email?.type === "required" &&
-                    (<p>Your email is required</p>)}
+                    (<p className={styles.error}>Your email is required</p>)}
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Control type="password" name="password" ref={register({required: true})}
                                   placeholder="Password"/>
                     {errors.password?.type === "required" &&
-                    (<p>Your password is required</p>)}
+                    (<p className={styles.error}>Your password is required</p>)}
                 </Form.Group>
                 <Button variant="info" type="submit">Sign In</Button>{' '}
                 <div className={styles.text}>
